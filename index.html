@@ -956,7 +956,9 @@ async function runCloudSync(announce){
   var successful=false;
   for(var attempt=0;attempt<4;attempt++){
    var initialLocalRevision=localMutationCounter;
-   var remoteFile=await githubRequest("GET",cloudCredentials.token);
+   var tokenForRequest=cloudCredentials.token;
+   var remoteFile=await githubRequest("GET",tokenForRequest);
+   if(accountUser||!cloudCredentials||cloudCredentials.token!==tokenForRequest)return;
    var remoteSnapshot={version:1,events:[],deleted:{}};
    if(remoteFile){
     var remoteWrapper=JSON.parse(decText(b64Bytes(remoteFile.content)));
@@ -965,10 +967,12 @@ async function runCloudSync(announce){
    var merged=mergeCloudData(remoteSnapshot);
    var unchanged=remoteFile&&snapshotsEqual(merged.events,remoteSnapshot.events)&&snapshotsEqual(merged.deleted,remoteSnapshot.deleted||{});
    if(!unchanged){
+    if(accountUser||!cloudCredentials||cloudCredentials.token!==tokenForRequest)return;
     var encrypted=await cloudEncrypt(merged,cloudCredentials.password);
+    if(accountUser||!cloudCredentials||cloudCredentials.token!==tokenForRequest)return;
     var body={message:"Sync agenda DAW (encrypted data)",content:bytesB64(encText(JSON.stringify(encrypted)))};
     if(remoteFile)body.sha=remoteFile.sha;
-    try{await githubRequest("PUT",cloudCredentials.token,body)}catch(e){if(e.retryable&&attempt<3)continue;throw e}
+    try{await githubRequest("PUT",tokenForRequest,body)}catch(e){if(e.retryable&&attempt<3)continue;throw e}
    }
    if(localMutationCounter!==initialLocalRevision){merged=mergeCloudData(merged);cloudQueued=true}
    persistCloudMerge(merged);
