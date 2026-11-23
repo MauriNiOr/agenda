@@ -471,6 +471,7 @@ try{var oldDeleted=JSON.parse(localStorage.getItem(DELETED_KEY)||"{}");if(oldDel
 function copyEvent(ev){return JSON.parse(JSON.stringify(ev))}
 function eventWithoutStamp(e){var v=copyEvent(e);delete v._updatedAt;return JSON.stringify(v)}
 var lastLocalEvents=new Map(storage.map(function(e){return [e.id,eventWithoutStamp(e)]}));
+var localMutationCounter=0;
 function saveLocalWithoutSync(){
  try{
   localStorage.setItem(STORAGE_KEY,JSON.stringify(storage));
@@ -480,6 +481,7 @@ function saveLocalWithoutSync(){
  }catch(e){toast("No se pudo guardar en este navegador. Descarga una copia de seguridad.");return false}
 }
 function save(){
+ localMutationCounter++;
  var t=Date.now();
  var present=new Set();
  storage.forEach(function(ev){present.add(ev.id);
@@ -870,6 +872,7 @@ async function runCloudSync(announce){
  try{
   var successful=false;
   for(var attempt=0;attempt<4;attempt++){
+   var initialLocalRevision=localMutationCounter;
    var remoteFile=await githubRequest("GET",cloudCredentials.token);
    var remoteSnapshot={version:1,events:[],deleted:{}};
    if(remoteFile){
@@ -884,6 +887,7 @@ async function runCloudSync(announce){
     if(remoteFile)body.sha=remoteFile.sha;
     try{await githubRequest("PUT",cloudCredentials.token,body)}catch(e){if(e.retryable&&attempt<3)continue;throw e}
    }
+   if(localMutationCounter!==initialLocalRevision){merged=mergeCloudData(merged);cloudQueued=true}
    persistCloudMerge(merged);
    successful=true;
    break;
