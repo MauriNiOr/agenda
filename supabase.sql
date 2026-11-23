@@ -55,16 +55,16 @@ begin
     or jsonb_typeof(next_deleted) is distinct from 'object' then
     raise exception 'Formato de agenda no válido';
   end if;
-  insert into public.planner_data as record
+  insert into public.planner_data as p
     (user_id, revision, events, deleted, updated_at)
   values
     (current_uid, 1, next_events, next_deleted, now())
   on conflict (user_id) do update
-    set revision = record.revision + 1,
+    set revision = p.revision + 1,
         events = excluded.events,
         deleted = excluded.deleted,
         updated_at = now()
-    where record.revision = expected_revision;
+    where p.revision = expected_revision;
 
   get diagnostics affected = row_count;
   return affected = 1;
