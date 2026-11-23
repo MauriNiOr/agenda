@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#11172d">
+<meta name="description" content="Agenda DAW: horario semanal, exámenes, tareas y festivos de Cataluña 2026–2027.">
+<title>Mi Agenda DAW · Calendario de estudio</title>
+<style>
+:root{--bg:#f6f7fb;--paper:#fff;--ink:#1c2540;--muted:#8490a7;--line:#e8ebf4;--brand:#7158ea;--brand-dark:#5740cf;--blue:#458ef4;--sidebar:#141b31;--shadow:0 12px 40px #212b5010;--radius:20px;--program:#dff1ff;--program-ink:#2d7fc5;--bases:#f8e5f2;--bases-ink:#ad5294;--sistemes:#e8e4ff;--sistemes-ink:#6757c5;--lang:#e2ebff;--lang-ink:#4375d5;--disseny:#dcf7f9;--disseny-ink:#27949d;--entorns:#fbe8de;--entorns-ink:#bd735b;--server:#eee3ff;--server-ink:#8b52cb;--angles:#fff2cd;--angles-ink:#b88a26;--tutoria:#e6f6d9;--tutoria-ink:#669944;--digital:#ffe5e2;--digital-ink:#bd6865}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);font-size:14px}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #aea3fb;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.55}
+.app{display:flex;min-height:100vh}.sidebar{width:254px;background:var(--sidebar);color:#fff;position:sticky;top:0;height:100vh;flex-shrink:0;padding:30px 18px;display:flex;flex-direction:column}.brand{display:flex;align-items:center;gap:12px;padding:0 12px 28px}.brand-icon{display:grid;place-items:center;background:linear-gradient(135deg,#aa80ff,#5f68e5);width:42px;height:42px;border-radius:13px;font-size:24px;box-shadow:0 7px 24px #7b58e570}.brand-text strong{display:block;font-size:18px;letter-spacing:-.5px}.brand-text small{display:block;font-size:11px;color:#abb6d5;margin-top:3px}.nav-title{color:#7f8dab;font-size:10px;font-weight:750;letter-spacing:1.8px;padding:20px 15px 11px}.nav-btn{width:100%;border:0;background:transparent;color:#acb9d7;border-radius:12px;padding:14px 15px;text-align:left;display:flex;align-items:center;gap:13px;font-weight:620;margin-bottom:4px;transition:background .2s}.nav-btn:hover,.nav-btn.active{background:#313856;color:white}.nav-btn.active{box-shadow:inset 3px 0 #9a8aff}.nav-ico{width:21px;text-align:center;font-size:17px}.sidebar-bottom{margin-top:auto;padding:15px 12px;border:1px solid #37415f;border-radius:16px;background:#202a45}.sidebar-bottom b{display:block;font-size:13px;margin:6px 0}.sidebar-bottom p{font-size:11px;line-height:1.65;color:#aab8d5;margin:0}.status-dot{display:inline-block;width:7px;height:7px;background:#3ad6a0;border-radius:100%;margin-right:6px}
+.main{width:calc(100% - 254px);padding:30px clamp(20px,3vw,52px) 60px;max-width:1640px;margin:0 auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:33px}.crumb{font-size:13px;color:var(--muted);font-weight:600}.crumb strong{color:var(--ink)}.top-actions{display:flex;gap:10px;align-items:center}.date-pill{padding:11px 15px;background:white;border:1px solid var(--line);border-radius:13px;color:#66738c;font-size:12px;font-weight:650}.avatar{display:grid;place-items:center;background:#e9e4ff;border-radius:13px;width:38px;height:38px;color:#7158ea;font-weight:850}.btn{display:inline-flex;justify-content:center;align-items:center;gap:9px;border:1px solid var(--line);padding:12px 18px;background:#fff;border-radius:12px;color:#34415d;font-weight:750;white-space:nowrap;transition:transform .15s,box-shadow .15s}.btn:hover{transform:translateY(-1px);box-shadow:0 5px 15px #151b3814}.btn.primary{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 8px 20px #7158ea35}.btn.primary:hover{background:var(--brand-dark)}.btn.ghost{background:transparent}.btn.icon-only{padding:9px 12px}.btn.small{padding:8px 12px;font-size:12px}.view{display:none}.view.active{display:block;animation:up .25s ease}@keyframes up{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:none}}
+.headline{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:23px}.eyebrow{font-weight:790;color:var(--brand);font-size:11px;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:10px}.headline h1{font-size:clamp(26px,3vw,38px);letter-spacing:-1.4px;margin:0 0 10px;font-weight:820}.subtitle{color:#8590a7;margin:0;line-height:1.65;font-size:13px}.hero{display:flex;justify-content:space-between;align-items:center;gap:24px;background:linear-gradient(112deg,#7961f4,#6f68ed 56%,#577ee9);padding:29px 32px;border-radius:23px;color:white;box-shadow:0 16px 40px #655bea22;margin-bottom:23px;overflow:hidden;position:relative}.hero:after{content:"";position:absolute;right:115px;bottom:-110px;width:340px;height:340px;border:1px solid #ffffff35;border-radius:100%;box-shadow:0 0 0 55px #ffffff0c,0 0 0 110px #ffffff0b}.hero>div{position:relative;z-index:1}.hero-label{display:inline-block;font-weight:750;letter-spacing:1.4px;text-transform:uppercase;font-size:10px;color:#ece9ff}.hero h2{font-size:25px;letter-spacing:-.7px;line-height:1.24;margin:9px 0}.hero p{margin:0;color:#ecebff;font-size:12px}.hero-deco{font-size:52px;opacity:.9}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin-bottom:23px}.stat{border-radius:18px;background:white;border:1px solid var(--line);padding:20px;display:flex;align-items:flex-start;gap:15px;box-shadow:var(--shadow)}.stat .sym{font-size:21px;width:44px;height:44px;display:grid;place-items:center;background:#f0edff;border-radius:13px;flex-shrink:0}.stat:nth-child(2) .sym{background:#fff0e7}.stat:nth-child(3) .sym{background:#e9f7ff}.stat:nth-child(4) .sym{background:#e7faf2}.stat strong{font-size:23px;font-weight:850;display:block;letter-spacing:-.7px;line-height:1.25}.stat small{color:#8c96aa;font-size:11px;display:block;margin-top:5px}.stat strong.smaller{font-size:14px;letter-spacing:0;line-height:1.5;max-width:170px}
+.layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,1fr);gap:20px}.panel{background:white;border-radius:20px;border:1px solid var(--line);box-shadow:var(--shadow);padding:22px;min-width:0}.panel+.panel{margin-top:0}.panel-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:19px}.panel-title h2,.section-h2{font-size:17px;letter-spacing:-.45px;margin:0;font-weight:800}.mini-nav{display:flex;align-items:center;gap:8px}.month-name{font-weight:800;color:#293452;font-size:15px;margin-right:8px;text-transform:capitalize}.arrow{border:1px solid var(--line);background:#fff;border-radius:10px;width:31px;height:31px;color:#64728e;font-size:20px;display:grid;place-items:center}.arrow:hover{background:#f0edff;color:var(--brand)}.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.weekday{text-align:center;font-size:10px;color:#9aa3b7;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:8px 0 12px}.day{min-height:76px;text-align:left;border:1px solid transparent;background:#fbfcff;padding:7px;border-radius:11px;display:flex;flex-direction:column;gap:6px;color:#53607a;overflow:hidden;position:relative}.day:hover{border-color:#a99af7;background:#f7f4ff}.day.dim{opacity:.3}.day.selected{background:#f0ecff;border-color:var(--brand)}.day.today .num{background:var(--brand);color:white}.day .num{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;font-weight:750;font-size:12px}.day .marks{display:flex;gap:3px;flex-wrap:wrap}.day .mark{background:#d7d1ff;color:#6552c5;font-size:9px;font-weight:800;padding:3px 5px;border-radius:5px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}.day .mark.exam{background:#ffe1dc;color:#c45a44}.day .mark.holiday{background:#e2f7eb;color:#3b996b}.day .mark.study{background:#e4efff;color:#5782c0}.day .dots{display:flex;gap:3px}.dot{width:5px;height:5px;border-radius:100%;background:#a1a4c9}.dot.exam{background:#e07168}.dot.study{background:#a18cf6}.day .dots .holiday{background:#4bc495}
+.calendar-footer{margin-top:16px;padding-top:15px;border-top:1px solid var(--line);display:flex;align-items:center;flex-wrap:wrap;gap:18px;color:#8994ab;font-size:11px;font-weight:620}.legend{display:inline-flex;gap:6px;align-items:center}.legend i{width:8px;height:8px;border-radius:3px;background:#a9a1f2}.legend:nth-child(2) i{background:#e17570}.legend:nth-child(3) i{background:#4ac497}.side-stack{display:flex;flex-direction:column;gap:20px}.side-stack .panel{flex:1}.selected-date{font-size:11px;color:#8e98ad;font-weight:600;text-transform:capitalize}.detail-list{display:flex;flex-direction:column;gap:9px}.detail-item{display:flex;gap:10px;align-items:start;padding:12px;border-radius:12px;background:#f8f9fd}.detail-time{font-size:10px;font-weight:850;color:#8590a9;min-width:73px;line-height:1.5}.detail-content{flex:1;min-width:0}.detail-content b{display:block;font-size:12px;line-height:1.4}.detail-content small{display:block;color:#8d98ad;font-size:10px;margin-top:4px;line-height:1.4}.tag{display:inline-block;padding:4px 7px;border-radius:6px;background:#f1ecff;color:#7158ea;font-size:10px;font-weight:800}.tag.exam{background:#ffebe9;color:#d1655d}.tag.holiday{background:#e5f8ec;color:#3e9a6c}.upcoming-row{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line);align-items:center}.upcoming-row:first-of-type{border-top:0}.date-chip{width:42px;min-width:42px;text-align:center;background:#f0edff;border-radius:11px;padding:7px 4px;color:#6a56ca}.date-chip b{display:block;font-size:17px}.date-chip small{font-size:9px;text-transform:uppercase;font-weight:750}.upcoming-row .info{flex:1;min-width:0}.upcoming-row .info b{font-size:12px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.upcoming-row .info small{display:block;color:#8d98ac;font-size:10px;margin-top:5px}.upcoming-row .counter{font-size:10px;font-weight:750;color:#695ac0;background:#f1edff;padding:6px;border-radius:7px}.empty{background:#f8f9fd;text-align:center;padding:25px 12px;border-radius:14px;color:#8590a6;font-size:12px;line-height:1.7}.empty .empty-icon{font-size:28px;display:block;margin-bottom:7px}.section-note{font-size:11px;color:#8d98ac;line-height:1.6;margin-top:14px}.pill{font-size:11px;color:#6857c6;background:#f0edff;padding:9px 13px;border-radius:100px;font-weight:800}
+.week-wrap{overflow:auto}.week-table{min-width:790px;display:grid;grid-template-columns:78px repeat(5,minmax(135px,1fr));border:1px solid var(--line);border-radius:15px;overflow:hidden}.w-head{padding:16px 8px;background:#fafbff;text-align:center;font-weight:800;border-bottom:1px solid var(--line);color:#53617a}.w-head.time{font-size:11px;color:#a1aabd}.w-head.current{color:var(--brand);background:#f0ecff}.w-time{display:flex;align-items:center;justify-content:center;font-weight:750;font-size:11px;color:#8b97a9;background:#fafbfe;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:6px}.w-cell{padding:5px;background:#fff;min-height:94px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.w-cell.free{background:#fafbff}.w-cell .class{height:100%;padding:12px 10px;border-radius:10px;background:var(--sub-bg);color:var(--sub-ink);min-height:83px}.class b{font-size:11px;display:block;line-height:1.4}.class small{font-size:10px;display:block;margin-top:6px;opacity:.85;line-height:1.4}.w-break{grid-column:1/-1;display:flex;gap:10px;align-items:center;justify-content:center;padding:9px;background:#f2f4f9;color:#9aa5b8;font-size:10px;font-weight:750;letter-spacing:.4px}.subject-legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.subject-legend span{border-radius:7px;font-size:10px;font-weight:750;padding:7px 9px;background:var(--sub-bg);color:var(--sub-ink)}.subject-legend span:first-child{border:1px solid #8cbbf4}
+.filters{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:18px}.filter{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 14px;font-size:12px;color:#79849a;font-weight:740}.filter.active{background:#eeeaff;border-color:#c9bfff;color:#6853c6}.exams-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}.exam-card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:21px;box-shadow:var(--shadow);border-top:3px solid var(--brand)}.exam-card.done{opacity:.7}.exam-card h3{font-size:16px;line-height:1.4;margin:12px 0 7px}.exam-card p{color:#7f8ca4;font-size:12px;line-height:1.6;margin:0 0 12px;min-height:26px;overflow-wrap:anywhere}.exam-head{display:flex;justify-content:space-between;align-items:center;gap:5px}.exam-meta{font-size:11px;font-weight:750;color:#8b96ac}.exam-actions{display:flex;gap:7px;margin-top:15px}.exam-actions .btn{flex:1;padding:8px 10px;font-size:11px}.exam-actions .delete{flex:0 0 auto;color:#d36060}.warn{background:#fff9ea;color:#9e7716;border:1px solid #f5e8bd;padding:13px 15px;border-radius:12px;font-size:12px;line-height:1.65;margin-bottom:19px}.holiday-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:13px}.holiday-card{display:flex;align-items:center;gap:13px;background:white;border:1px solid var(--line);border-radius:15px;padding:17px}.holiday-card .h-date{border-radius:11px;background:#e8f7ef;padding:9px;min-width:52px;text-align:center;color:#398b65}.holiday-card .h-date b{display:block;font-size:20px}.holiday-card .h-date small{font-size:10px;font-weight:750;text-transform:uppercase}.holiday-card .h-info{flex:1}.holiday-card .h-info b{font-size:12px;display:block;line-height:1.4}.holiday-card .h-info small{display:block;font-size:10px;color:#8e99ad;margin-top:5px}.source-row{margin-top:16px;display:flex;gap:15px;flex-wrap:wrap}.source-row a{font-size:11px;color:#6c59d1;font-weight:700;text-decoration:none}.source-row a:hover{text-decoration:underline}.backup-tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.toast{position:fixed;bottom:25px;right:25px;background:#202843;color:white;border-radius:11px;padding:14px 19px;box-shadow:0 10px 30px #19234544;z-index:60;font-size:13px;max-width:340px;opacity:0;transform:translateY(12px);pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:none}
+.modal-backdrop{position:fixed;inset:0;z-index:50;background:#111629ae;display:none;align-items:center;justify-content:center;padding:15px;overflow:auto}.modal-backdrop.open{display:flex}.modal{background:#fff;box-shadow:0 22px 65px #11162940;border-radius:22px;width:min(100%,530px);padding:27px;max-height:95vh;overflow:auto}.modal-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:19px}.modal-header h2{font-size:20px;margin:0;letter-spacing:-.5px}.modal-close{border:0;background:#f4f5f9;border-radius:9px;padding:9px 12px;font-size:18px;color:#66728d}.fields{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field.full{grid-column:1/-1}.field label{display:block;font-size:11px;font-weight:800;color:#606b83;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;border:1px solid #e1e5ef;border-radius:11px;padding:12px 13px;color:#2b3650;background:#fff;min-width:0;outline-color:#aa9ff7}.field textarea{resize:vertical;min-height:78px}.form-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:21px}.form-help{color:#8791a6;font-size:11px;line-height:1.5;margin:12px 0 0}
+@media(max-width:1200px){.sidebar{width:218px}.main{width:calc(100% - 218px);padding:26px 24px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:1fr}.side-stack{display:grid;grid-template-columns:1fr 1fr;gap:16px}}@media(max-width:800px){.app{display:block}.sidebar{position:sticky;z-index:10;top:0;width:100%;height:auto;padding:10px 15px;display:flex;flex-direction:row;align-items:center;gap:8px;box-shadow:0 3px 15px #141b3124}.brand{padding:0;flex:0 0 auto;gap:8px}.brand-icon{width:34px;height:34px;font-size:18px}.brand-text strong{font-size:14px}.brand-text small,.sidebar .nav-title,.sidebar-bottom{display:none}.menu{display:flex;overflow:auto;gap:5px;margin-left:auto}.nav-btn{width:auto;font-size:0;margin:0;padding:10px 11px;gap:0}.nav-ico{font-size:17px}.main{width:100%;padding:21px 15px 45px}.topbar{margin-bottom:19px}.date-pill{font-size:10px;padding:9px}.headline{align-items:flex-start}.headline h1{font-size:27px}.hero{padding:23px 22px}.side-stack{grid-template-columns:1fr 1fr}.day{min-height:62px;padding:4px;gap:3px}.day .mark{font-size:8px;padding:2px 3px}.day .num{width:21px;height:21px}.week-table{min-width:810px}}@media(max-width:560px){.stats{gap:9px}.stat{padding:14px;gap:9px}.stat .sym{width:34px;height:34px;font-size:16px}.stat strong{font-size:20px}.stat strong.smaller{font-size:12px}.stat small{font-size:10px}.hero-deco{display:none}.hero h2{font-size:22px}.side-stack{grid-template-columns:1fr}.calendar{gap:2px}.panel{padding:15px}.day{min-height:57px;border-radius:7px;padding:3px}.day .mark{max-width:100%;font-size:7px;overflow:hidden}.day .mark.study{display:none}.calendar-footer{gap:10px}.month-name{font-size:13px}.headline{flex-direction:column;align-items:stretch}.headline .btn{align-self:flex-start}.date-pill{display:none}.fields{grid-template-columns:1fr}.field.full{grid-column:1}.modal{padding:18px}.sidebar{padding:9px}.brand-text small{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><span class="brand-icon">✦</span><div class="brand-text"><strong>DAW Planner</strong><small>Tu espacio de estudio</small></div></div>
+  <div class="nav-title">MENÚ PRINCIPAL</div>
+  <nav class="menu" aria-label="Navegación principal">
+    <button class="nav-btn active" data-view="inicio" aria-label="Inicio"><span class="nav-ico">▦</span> Inicio</button>
+    <button class="nav-btn" data-view="calendario" aria-label="Calendario"><span class="nav-ico">▣</span> Calendario</button>
+    <button class="nav-btn" data-view="horario" aria-label="Horario"><span class="nav-ico">◷</span> Mi horario</button>
+    <button class="nav-btn" data-view="examenes" aria-label="Exámenes"><span class="nav-ico">✎</span> Exámenes</button>
+    <button class="nav-btn" data-view="festivos" aria-label="Festivos"><span class="nav-ico">☼</span> Festivos</button>
+  </nav>
+  <div class="sidebar-bottom"><span class="status-dot"></span><b>Curso DAW1M · 2026/27</b><p>Horario adaptado a tu grupo de Programación con Jaime Bocío.</p></div>
+</aside>
+<main class="main">
+  <header class="topbar"><div class="crumb">Mi espacio <span style="padding:0 6px">/</span> <strong id="breadNow">Inicio</strong></div><div class="top-actions"><div class="date-pill" id="todayLabel"></div><div class="avatar" aria-label="Estudiante">DAW</div></div></header>
+  <section id="view-inicio" class="view active">
+    <div class="headline"><div><div class="eyebrow">TU AGENDA PERSONAL</div><h1>Organiza tu semana ✨</h1><p class="subtitle">Tus clases, exámenes y días libres, todo en un mismo lugar.</p></div><button class="btn primary add-exam">＋ Añadir examen</button></div>
+    <div class="hero"><div><span class="hero-label">CURSO 2026 — 2027</span><h2>Todo listo para un gran curso.</h2><p>Menos sorpresas, más tiempo para estudiar lo importante.</p></div><div class="hero-deco" aria-hidden="true">📚</div></div>
+    <div class="stats" id="stats"></div>
+    <div class="layout"><div class="panel" id="homeCalendar"></div><div class="side-stack"><div class="panel"><div class="panel-title"><h2>📍 Día seleccionado</h2><span class="selected-date" id="selectedLabel"></span></div><div id="selectedContent"></div></div><div class="panel"><div class="panel-title"><h2>📌 Próximos exámenes</h2><button class="btn small ghost" data-goto="examenes">Ver todos</button></div><div id="upcomingExams"></div></div></div></div>
+  </section>
+  <section id="view-calendario" class="view"><div class="headline"><div><div class="eyebrow">VISIÓN MENSUAL</div><h1>Calendario</h1><p class="subtitle">Elige un día para consultar las clases y los exámenes.</p></div><button class="btn primary add-exam">＋ Nuevo examen</button></div><div class="layout"><div class="panel" id="fullCalendar"></div><div class="side-stack"><div class="panel"><div class="panel-title"><h2>Agenda del día</h2><span class="selected-date" id="selectedLabel2"></span></div><div id="selectedContent2"></div></div><div class="panel"><div class="panel-title"><h2>Próximos eventos</h2></div><div id="upcomingHolidays"></div></div></div></div></section>
+  <section id="view-horario" class="view"><div class="headline"><div><div class="eyebrow">CLASES SEMANALES</div><h1>Mi horario</h1><p class="subtitle">De lunes a viernes · DAW1M · Programación con Jaime Bocío.</p></div><span class="pill">Curso 2026/27</span></div><div class="panel"><div class="panel-title"><h2>Horario de clases</h2><span class="subtitle">Desliza horizontalmente en móvil →</span></div><div class="week-wrap" id="weeklySchedule"></div><div class="subject-legend" id="subjectLegend"></div><p class="section-note">Los tramos de Programación se han seleccionado del grupo de <b>Jaime Bocío</b> que aparece en tu horario. Las aulas pueden variar; compruébalas en el centro.</p></div></section>
+  <section id="view-examenes" class="view"><div class="headline"><div><div class="eyebrow">TUS EVALUACIONES</div><h1>Exámenes y entregas</h1><p class="subtitle">Añade fechas, temas y prioridades. Se guardan en este navegador.</p></div><button class="btn primary add-exam">＋ Añadir examen</button></div><div class="filters"><button class="filter active" data-filter="pending">Pendientes</button><button class="filter" data-filter="all">Todos</button><button class="filter" data-filter="done">Completados</button></div><div class="exams-grid" id="examList"></div><div class="backup-tools"><button class="btn small" id="exportBackup">↓ Exportar copia de seguridad</button><button class="btn small" id="importBackup">↑ Importar copia</button><input type="file" id="backupFile" accept="application/json,.json" hidden><button class="btn small" id="exportIcs">▣ Exportar calendario (.ics)</button></div><p class="section-note">Los datos están en el almacenamiento local de este navegador, no en GitHub. Haz una copia si vas a cambiar de dispositivo o borrar datos del navegador.</p></section>
+  <section id="view-festivos" class="view"><div class="headline"><div><div class="eyebrow">CALENDARIO ESCOLAR</div><h1>Festivos y vacaciones</h1><p class="subtitle">Cataluña y Reus · Curso escolar 2026–2027.</p></div><button class="btn primary add-holiday">＋ Día libre del centro</button></div><div class="warn">ℹ️ Incluye festivos oficiales y vacaciones escolares. <b>No incluye los 4 días de libre disposición de tu instituto</b> porque dependen del centro. Puedes añadirlos con el botón superior. La fecha final de clases de FP también depende del centro.</div><div class="holiday-grid" id="holidayList"></div><div class="source-row"><a href="https://web.gencat.cat/ca/ciutadania/educacio-formacio/calendari-escolar-catalunya" target="_blank" rel="noopener">↗ Calendario escolar oficial</a><a href="https://treball.gencat.cat/ca/ambits/relacions_laborals/ci/calendari_laboral/calendari-festes-2027/" target="_blank" rel="noopener">↗ Festivos oficiales 2027</a><a href="https://seuelectronica.dipta.cat/calendari-festius?p_p_id=2_WAR_kaleodesignerportlet" target="_blank" rel="noopener">↗ Festivos Reus 2026</a></div></section>
+</main></div>
+<div class="modal-backdrop" id="modalBackdrop" role="presentation">
+<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+ <div class="modal-header"><h2 id="modalTitle">Añadir examen</h2><button type="button" class="modal-close" id="closeModal" aria-label="Cerrar">×</button></div>
+ <form id="eventForm"><input id="eventId" type="hidden"><input id="eventKind" type="hidden" value="exam">
+ <div class="fields">
+  <div class="field full"><label for="eventTitle">Nombre del examen o día libre *</label><input id="eventTitle" required maxlength="110" placeholder="Ej. Examen de arrays en PHP"></div>
+  <div class="field full" id="subjectField"><label for="eventSubject">Asignatura *</label><select id="eventSubject"></select></div>
+  <div class="field"><label for="eventDate">Fecha *</label><input type="date" id="eventDate" required></div>
+  <div class="field" id="timeField"><label for="eventTime">Hora</label><input type="time" id="eventTime" value="09:00"></div>
+  <div class="field" id="priorityField"><label for="eventPriority">Prioridad</label><select id="eventPriority"><option value="alta">Alta</option><option value="media" selected>Media</option><option value="baja">Baja</option></select></div>
+  <div class="field" id="typeField"><label for="eventType">Tipo</label><select id="eventType"><option value="examen">Examen</option><option value="entrega">Entrega</option><option value="repaso">Sesión de estudio</option></select></div>
+  <div class="field full"><label for="eventNotes">Notas (opcional)</label><textarea id="eventNotes" maxlength="700" placeholder="Temas, material que entra, cosas para recordar…"></textarea></div>
+ </div>
+ <p class="form-help" id="formHelp">Se guardará solo en este dispositivo, incluso si cierras la página.</p>
+ <div class="form-actions"><button type="button" class="btn" id="cancelModal">Cancelar</button><button type="submit" class="btn primary" id="saveModal">Guardar</button></div>
+ </form>
+</div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+"use strict";
+var STORAGE_KEY="daw-planner-mauri-2026-v1";
+var today=new Date();today.setHours(0,0,0,0);
+function pad(n){return String(n).padStart(2,"0")}
+function key(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
+function parseDate(v){var a=v.split("-").map(Number);return new Date(a[0],a[1]-1,a[2])}
+function addDay(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x}
+function daysUntil(v){return Math.round((parseDate(v)-today)/86400000)}
+function fmt(v,opt){return parseDate(v).toLocaleDateString("es-ES",opt||{day:"numeric",month:"long"})}
+function safe(v){return String(v||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
+function id(){return "ev-"+Date.now()+"-"+Math.random().toString(36).slice(2,9)}
+var subjects=[
+{id:"program",name:"Programación",short:"Programación",teacher:"Jaime Bocío",bg:"var(--program)",fg:"var(--program-ink)"},
+{id:"bases",name:"Bases de dades",short:"Bases de datos",teacher:"Enrique Lorente",bg:"var(--bases)",fg:"var(--bases-ink)"},
+{id:"sistemes",name:"Sistemes informàtics",short:"Sistemas",teacher:"Clara Domínguez",bg:"var(--sistemes)",fg:"var(--sistemes-ink)"},
+{id:"lang",name:"Llenguatges de marques",short:"Lenguajes de marcas",teacher:"David Martí",bg:"var(--lang)",fg:"var(--lang-ink)"},
+{id:"disseny",name:"Disseny d'interfícies web",short:"Diseño web",teacher:"Clara Domínguez",bg:"var(--disseny)",fg:"var(--disseny-ink)"},
+{id:"entorns",name:"Entorns de desenvolupament",short:"Entornos",teacher:"Daniel Garcia",bg:"var(--entorns)",fg:"var(--entorns-ink)"},
+{id:"server",name:"Desenvolupament web en entorn servidor",short:"Web servidor",teacher:"Ester Sánchez",bg:"var(--server)",fg:"var(--server-ink)"},
+{id:"angles",name:"Anglès professional",short:"Inglés",teacher:"Augusto Ferri",bg:"var(--angles)",fg:"var(--angles-ink)"},
+{id:"tutoria",name:"Tutoria - DAW1",short:"Tutoría",teacher:"Daniel Garcia",bg:"var(--tutoria)",fg:"var(--tutoria-ink)"},
+{id:"digital",name:"Digitalització aplicada als sectors productius",short:"Digitalización",teacher:"Enrique Lorente",bg:"var(--digital)",fg:"var(--digital-ink)"}];
+var subMap={};subjects.forEach(function(s){subMap[s.id]=s});
+var slots=[
+{time:"08:30 – 09:30",start:"08:30"},
+{time:"09:30 – 10:30",start:"09:30"},
+{time:"10:55 – 11:55",start:"10:55"},
+{time:"11:55 – 12:50",start:"11:55"},
+{time:"13:10 – 14:00",start:"13:10"},
+{time:"14:00 – 15:00",start:"14:00"}];
+var schedule={
+1:[null,null,null,"angles","program","program"],
+2:["sistemes","digital","program","program","bases","bases"],
+3:["bases","bases","entorns","entorns","server","server"],
+4:["lang","lang","disseny","disseny","angles","tutoria"],
+5:[null,"program","program","sistemes","sistemes","server"]};
+var rooms={
+"1-4":"Avantsala Teatre","1-5":"Avantsala Teatre",
+"2-2":"AU213","2-3":"AU213",
+"5-1":"Simulada","5-2":"Simulada"};
+var holidayRaw=[
+["2026-09-11","Diada Nacional de Catalunya","Festivo oficial"],["2026-09-25","Misericòrdia · Reus","Festivo local"],
+["2026-10-12","Fiesta Nacional de España","Festivo oficial"],["2026-11-01","Todos los Santos","Festivo oficial"],
+["2026-12-08","Inmaculada Concepción","Festivo oficial"],["2026-12-25","Navidad","Festivo oficial"],["2026-12-26","Sant Esteve","Festivo oficial"],
+["2027-01-01","Año Nuevo","Festivo oficial"],["2027-01-06","Reyes","Festivo oficial"],
+["2027-03-26","Viernes Santo","Festivo oficial"],["2027-03-29","Lunes de Pascua","Festivo oficial"],
+["2027-05-01","Día del Trabajo","Festivo oficial"],["2027-06-24","Sant Joan","Festivo oficial"],["2027-06-29","Sant Pere · Reus","Festivo local (pendiente de publicación)"],
+["2027-09-11","Diada Nacional de Catalunya","Festivo oficial"],["2027-09-25","Misericòrdia · Reus","Festivo local (pendiente de publicación)"]
+];
+var holidays=new Map();holidayRaw.forEach(function(h){holidays.set(h[0],{title:h[1],type:h[2]})});
+function vacation(start,end,name){var e=parseDate(end);for(var d=parseDate(start);d<=e;d=addDay(d,1)){holidays.set(key(d),{title:name,type:"Vacaciones escolares"})}}
+vacation("2026-12-22","2027-01-07","Vacaciones de Navidad");
+vacation("2027-03-20","2027-03-29","Vacaciones de Semana Santa");
+holidayRaw.forEach(function(h){if(h[2].indexOf("Festivo")===0)holidays.set(h[0],{title:h[1],type:h[2]})});
+var storage=[];
+try{var data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");if(Array.isArray(data))storage=data.filter(validEvent)}catch(e){}
+function validEvent(x){return !!(x&&typeof x==="object"&&typeof x.id==="string"&&typeof x.title==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(x.date)&&["exam","holiday"].includes(x.kind))}
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(storage))}catch(e){toast("No se pudo guardar. Revisa el almacenamiento del navegador.")}}
+var displayed=new Date(today.getFullYear(),today.getMonth(),1),selected=key(today),filter="pending",activeView="inicio";
+document.getElementById("todayLabel").textContent=today.toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+var options=subjects.map(function(s){return '<option value="'+s.id+'">'+safe(s.name)+'</option>'}).join("");
+document.getElementById("eventSubject").innerHTML=options;
+function toast(message){var el=document.getElementById("toast");el.textContent=message;el.classList.add("show");clearTimeout(toast._timer);toast._timer=setTimeout(function(){el.classList.remove("show")},3500)}
+function titleFor(v){return ({inicio:"Inicio",calendario:"Calendario",horario:"Mi horario",examenes:"Exámenes",festivos:"Festivos"})[v]}
+function showView(v){activeView=v;document.querySelectorAll(".view").forEach(function(el){el.classList.toggle("active",el.id==="view-"+v)});document.querySelectorAll(".nav-btn").forEach(function(el){el.classList.toggle("active",el.dataset.view===v)});document.getElementById("breadNow").textContent=titleFor(v);window.scrollTo({top:0,behavior:"smooth"});render()}
+document.querySelectorAll("[data-view]").forEach(function(el){el.addEventListener("click",function(){showView(el.dataset.view)})});
+document.querySelectorAll("[data-goto]").forEach(function(el){el.addEventListener("click",function(){showView(el.dataset.goto)})});
+function eventsOn(k){return storage.filter(function(e){return e.date===k})}
+function holidayOn(k){return eventsOn(k).find(function(e){return e.kind==="holiday"})||holidays.get(k)}
+function lessonsOn(k){var d=parseDate(k),w=d.getDay();return holidayOn(k)?[]:(schedule[w]||[]).map(function(s,i){if(!s)return null;return {subject:s,time:slots[i].time,room:rooms[w+"-"+i]||"A103"}}).filter(Boolean)}
+function nextExams(){return storage.filter(function(e){return e.kind==="exam"&&!e.done&&daysUntil(e.date)>=0}).sort(function(a,b){return a.date.localeCompare(b.date)||(a.time||"").localeCompare(b.time||"")})}
+function nextHoliday(){var arr=[...holidays.entries()].filter(function(h){return h[0]>=key(today)}).sort(function(a,b){return a[0].localeCompare(b[0])});return arr.length?arr[0]:null}
+function examCount(){return storage.filter(function(e){return e.kind==="exam"&&!e.done}).length}
+function renderStats(){var n=nextExams()[0],h=nextHoliday();document.getElementById("stats").innerHTML=[
+["✎",String(examCount()),"Exámenes pendientes"],
+["◷",n?(daysUntil(n.date)===0?"¡Hoy!":daysUntil(n.date)+" días"):"—","Próximo examen"],
+["▣","26","Sesiones por semana"],
+["☼",h?fmt(h[0],{day:"numeric",month:"short"}):"—","Próximo día libre"]
+].map(function(v){return '<div class="stat"><span class="sym">'+v[0]+'</span><div><strong>'+safe(v[1])+'</strong><small>'+safe(v[2])+'</small></div></div>'}).join("")}
+function calHtml(){
+var y=displayed.getFullYear(),m=displayed.getMonth(),monthName=displayed.toLocaleDateString("es-ES",{month:"long",year:"numeric"});
+var start=(new Date(y,m,1).getDay()+6)%7;var total=new Date(y,m+1,0).getDate();var cells=[];
+["L","M","X","J","V","S","D"].forEach(function(d){cells.push('<div class="weekday">'+d+"</div>")});
+var weeks=Math.ceil((start+total)/7);
+for(var i=0;i<weeks*7;i++){
+var date=new Date(y,m,1-start+i),k=key(date),isOther=date.getMonth()!==m,ev=eventsOn(k).filter(function(x){return x.kind==="exam"}),hol=holidayOn(k),less=lessonsOn(k);
+var marks=[];
+if(hol)marks.push('<span class="mark holiday">Festivo</span>');
+if(ev.length)marks.push('<span class="mark exam">'+ev.length+' examen'+(ev.length>1?"es":"")+"</span>");
+if(!hol&&!ev.length&&less.length)marks.push('<span class="mark study">'+less.length+' clases</span>');
+cells.push('<button type="button" class="day'+(isOther?" dim":"")+(k===selected?" selected":"")+(k===key(today)?" today":"")+'" data-date="'+k+'" aria-label="'+safe(fmt(k,{weekday:"long",day:"numeric",month:"long"}))+'"><span class="num">'+date.getDate()+'</span><span class="marks">'+marks.join("")+'</span></button>');
+}
+return '<div class="panel-title"><h2>Mi calendario</h2><div class="mini-nav"><span class="month-name">'+safe(monthName)+'</span><button type="button" class="arrow" data-month="-1" aria-label="Mes anterior">‹</button><button type="button" class="arrow" data-month="1" aria-label="Mes siguiente">›</button><button type="button" class="btn small" data-today="1">Hoy</button></div></div><div class="calendar">'+cells.join("")+'</div><div class="calendar-footer"><span class="legend"><i></i> Clases</span><span class="legend"><i></i> Exámenes</span><span class="legend"><i></i> Festivos y vacaciones</span></div>';
+}
+function renderCalendar(){var html=calHtml();["homeCalendar","fullCalendar"].forEach(function(k){document.getElementById(k).innerHTML=html;document.getElementById(k).querySelectorAll("[data-date]").forEach(function(btn){btn.addEventListener("click",function(){selected=btn.dataset.date;displayed=new Date(parseDate(selected).getFullYear(),parseDate(selected).getMonth(),1);renderCalendar();renderDetail()})});document.getElementById(k).querySelectorAll("[data-month]").forEach(function(btn){btn.addEventListener("click",function(){displayed.setMonth(displayed.getMonth()+Number(btn.dataset.month));renderCalendar()})});document.getElementById(k).querySelector("[data-today]").addEventListener("click",function(){selected=key(today);displayed=new Date(today.getFullYear(),today.getMonth(),1);renderCalendar();renderDetail()})})}
+function renderDetail(){
+var text=fmt(selected,{weekday:"long",day:"numeric",month:"long"});
+document.getElementById("selectedLabel").textContent=text;document.getElementById("selectedLabel2").textContent=text;
+var list=[],h=holidayOn(selected),events=eventsOn(selected).filter(function(x){return x.kind==="exam"}).sort(function(a,b){return (a.time||"").localeCompare(b.time||"")});
+if(h)list.push('<div class="detail-item"><span class="detail-time">☼</span><div class="detail-content"><b>'+safe(h.title)+'</b><small>'+safe(h.type||"Día libre del centro")+' · Sin clases</small></div></div>');
+events.forEach(function(e){list.push('<div class="detail-item"><span class="detail-time">'+safe(e.time||"Todo el día")+'</span><div class="detail-content"><b>'+safe(e.title)+'</b><small>'+safe((subMap[e.subject]||{}).short||"Actividad")+' · '+safe(e.type||"Examen")+'</small></div><span class="tag exam">EXAMEN</span></div>')});
+lessonsOn(selected).forEach(function(lesson){var s=subMap[lesson.subject];list.push('<div class="detail-item"><span class="detail-time">'+safe(lesson.time)+'</span><div class="detail-content"><b>'+safe(s.short)+'</b><small>'+safe(s.teacher)+' · '+safe(lesson.room)+'</small></div></div>')});
+var html=list.length?'<div class="detail-list">'+list.join("")+'</div>':'<div class="empty"><span class="empty-icon">🌿</span>No hay clases ni eventos este día.</div>';
+document.getElementById("selectedContent").innerHTML=html;document.getElementById("selectedContent2").innerHTML=html;
+}
+function renderUpcoming(){
+var arr=nextExams().slice(0,4);
+document.getElementById("upcomingExams").innerHTML=arr.length?arr.map(function(e){var d=parseDate(e.date),days=daysUntil(e.date);return '<div class="upcoming-row"><div class="date-chip"><b>'+d.getDate()+'</b><small>'+d.toLocaleDateString("es-ES",{month:"short"})+'</small></div><div class="info"><b>'+safe(e.title)+'</b><small>'+safe((subMap[e.subject]||{}).short||"Asignatura")+'</small></div><span class="counter">'+(days===0?"Hoy":days+" d")+'</span></div>'}).join(""):'<div class="empty"><span class="empty-icon">🎉</span>¡No tienes exámenes próximos!<br>Añade el primero cuando sepas la fecha.</div>';
+var next=[...holidays.entries()].filter(function(h){return h[0]>=key(today)}).sort(function(a,b){return a[0].localeCompare(b[0])}).slice(0,4);
+document.getElementById("upcomingHolidays").innerHTML=next.map(function(h){return '<div class="upcoming-row"><div class="date-chip"><b>'+parseDate(h[0]).getDate()+'</b><small>'+fmt(h[0],{month:"short"})+'</small></div><div class="info"><b>'+safe(h[1].title)+'</b><small>'+safe(h[1].type)+'</small></div></div>'}).join("");
+}
+function renderWeek(){
+var weekDays=["Lunes","Martes","Miércoles","Jueves","Viernes"];var html='<div class="week-table"><div class="w-head time">Hora</div>';
+weekDays.forEach(function(d,i){html+='<div class="w-head'+(today.getDay()===i+1?" current":"")+'">'+d+"</div>"});
+slots.forEach(function(slot,i){
+if(i===2||i===4)html+='<div class="w-break">☕ Descanso · '+(i===2?"10:30 – 10:55":"12:50 – 13:10")+"</div>";
+html+='<div class="w-time">'+slot.time.replace(" – ","<br>–<br>")+"</div>";
+for(var j=1;j<=5;j++){var v=schedule[j][i];if(!v){html+='<div class="w-cell free"></div>';continue}var s=subMap[v],r=rooms[j+"-"+i]||"A103";html+='<div class="w-cell"><div class="class" style="--sub-bg:'+s.bg+';--sub-ink:'+s.fg+'"><b>'+safe(s.name)+'</b><small>'+safe(s.teacher)+'</small><small>⌁ '+safe(r)+'</small></div></div>'}
+});html+="</div>";document.getElementById("weeklySchedule").innerHTML=html;
+document.getElementById("subjectLegend").innerHTML=subjects.map(function(s){return '<span style="--sub-bg:'+s.bg+';--sub-ink:'+s.fg+'">'+safe(s.short)+'</span>'}).join("");
+}
+function statusTag(e){var n=daysUntil(e.date);if(e.done)return "✓ Completado";if(n<0)return "Atrasado";if(n===0)return "¡Hoy!";if(n===1)return "Mañana";return "Faltan "+n+" días"}
+function renderExams(){
+document.querySelectorAll("[data-filter]").forEach(function(e){e.classList.toggle("active",e.dataset.filter===filter)});
+var events=storage.filter(function(e){return e.kind==="exam"&&(filter==="all"||(filter==="done"?e.done:!e.done))}).sort(function(a,b){return a.date.localeCompare(b.date)||(a.time||"").localeCompare(b.time||"")});
+document.getElementById("examList").innerHTML=events.length?events.map(function(e){
+return '<article class="exam-card'+(e.done?" done":"")+'"><div class="exam-head"><span class="tag exam">'+safe(e.type||"Examen")+'</span><span class="exam-meta">'+safe(statusTag(e))+'</span></div><h3>'+safe(e.title)+'</h3><p>'+safe(e.notes||"Sin notas adicionales.")+'</p><div class="exam-meta">📚 '+safe((subMap[e.subject]||{}).name||"Asignatura")+'</div><div class="exam-meta" style="margin-top:8px">📅 '+safe(fmt(e.date,{weekday:"long",day:"numeric",month:"long",year:"numeric"}))+' · '+safe(e.time||"Sin hora")+'</div><div class="exam-actions"><button class="btn small" data-toggle="'+safe(e.id)+'">'+(e.done?"↶ Reabrir":"✓ Completar")+'</button><button class="btn small" data-edit="'+safe(e.id)+'">Editar</button><button class="btn small delete" data-delete="'+safe(e.id)+'" aria-label="Eliminar">✕</button></div></article>';
+}).join(""):'<div class="empty" style="grid-column:1/-1"><span class="empty-icon">🗒️</span>No hay exámenes en esta sección.<br>Pulsa «Añadir examen» para empezar.</div>';
+document.querySelectorAll("[data-toggle]").forEach(function(btn){btn.addEventListener("click",function(){var e=storage.find(function(x){return x.id===btn.dataset.toggle});if(e){e.done=!e.done;save();render();toast(e.done?"Marcado como completado":"Marcado como pendiente")}})});
+document.querySelectorAll("[data-edit]").forEach(function(btn){btn.addEventListener("click",function(){var e=storage.find(function(x){return x.id===btn.dataset.edit});if(e)openForm(e.kind,e)})});
+document.querySelectorAll("[data-delete]").forEach(function(btn){btn.addEventListener("click",function(){var e=storage.find(function(x){return x.id===btn.dataset.delete});if(e&&confirm("¿Eliminar «"+e.title+"»?")){storage=storage.filter(function(x){return x.id!==e.id});save();render();toast("Evento eliminado")}})});
+}
+function renderHolidays(){
+var all=holidayRaw.map(function(h){return {date:h[0],title:h[1],type:h[2],id:null}}).concat([
+{date:"2026-12-22",title:"Inicio de vacaciones de Navidad",type:"Hasta el 7 de enero de 2027"},
+{date:"2027-03-20",title:"Inicio de vacaciones de Semana Santa",type:"Hasta el 29 de marzo de 2027"}]).concat(storage.filter(function(e){return e.kind==="holiday"}).map(function(e){return {date:e.date,title:e.title,type:"Día libre del centro",id:e.id}}));
+all.sort(function(a,b){return a.date.localeCompare(b.date)});
+document.getElementById("holidayList").innerHTML=all.map(function(h){var d=parseDate(h.date);return '<div class="holiday-card"><div class="h-date"><b>'+d.getDate()+'</b><small>'+d.toLocaleDateString("es-ES",{month:"short"})+'</small></div><div class="h-info"><b>'+safe(h.title)+'</b><small>'+safe(h.type)+' · '+d.getFullYear()+'</small></div>'+(h.id?'<button class="btn icon-only small" data-edit-holiday="'+safe(h.id)+'" aria-label="Editar">✎</button><button class="btn icon-only small" data-del-holiday="'+safe(h.id)+'" aria-label="Eliminar">×</button>':"")+'</div>'}).join("");
+document.querySelectorAll("[data-edit-holiday]").forEach(function(el){el.addEventListener("click",function(){var e=storage.find(function(x){return x.id===el.dataset.editHoliday});if(e)openForm("holiday",e)})});
+document.querySelectorAll("[data-del-holiday]").forEach(function(el){el.addEventListener("click",function(){var e=storage.find(function(x){return x.id===el.dataset.delHoliday});if(e&&confirm("¿Eliminar este día libre?")){storage=storage.filter(function(x){return x.id!==e.id});save();render()}})});
+}
+function render(){renderStats();renderCalendar();renderDetail();renderUpcoming();renderExams();renderHolidays()}
+function openForm(kind,existing){
+document.getElementById("eventForm").reset();
+var isHoliday=kind==="holiday";document.getElementById("modalTitle").textContent=existing?"Editar "+(isHoliday?"día libre":"examen"):(isHoliday?"Añadir día libre del centro":"Añadir examen");
+document.getElementById("eventKind").value=kind;document.getElementById("eventId").value=existing?existing.id:"";
+["subjectField","timeField","priorityField","typeField"].forEach(function(f){document.getElementById(f).style.display=isHoliday?"none":""});
+document.getElementById("eventSubject").required=!isHoliday;
+document.getElementById("eventTitle").placeholder=isHoliday?"Ej. Día de libre disposición":"Ej. Examen de arrays en PHP";
+document.getElementById("eventDate").value=existing?existing.date:selected;
+document.getElementById("eventTitle").value=existing?existing.title:"";
+document.getElementById("eventSubject").value=existing&&existing.subject?existing.subject:"program";
+document.getElementById("eventTime").value=existing&&existing.time?existing.time:"09:00";
+document.getElementById("eventPriority").value=existing&&existing.priority?existing.priority:"media";
+document.getElementById("eventType").value=existing&&existing.type?existing.type:"examen";
+document.getElementById("eventNotes").value=existing?existing.notes||"":"";
+document.getElementById("formHelp").textContent=isHoliday?"Este día aparecerá sin clases en tu calendario.":"Los datos se guardan en este navegador, no en GitHub.";
+document.getElementById("modalBackdrop").classList.add("open");document.body.style.overflow="hidden";setTimeout(function(){document.getElementById("eventTitle").focus()},50)
+}
+function closeForm(){document.getElementById("modalBackdrop").classList.remove("open");document.body.style.overflow=""}
+document.querySelectorAll(".add-exam").forEach(function(el){el.addEventListener("click",function(){openForm("exam")})});
+document.querySelectorAll(".add-holiday").forEach(function(el){el.addEventListener("click",function(){openForm("holiday")})});
+document.getElementById("closeModal").addEventListener("click",closeForm);
+document.getElementById("cancelModal").addEventListener("click",closeForm);
+document.getElementById("modalBackdrop").addEventListener("click",function(e){if(e.target===e.currentTarget)closeForm()});
+window.addEventListener("keydown",function(e){if(e.key==="Escape")closeForm()});
+document.getElementById("eventForm").addEventListener("submit",function(e){
+e.preventDefault();var kind=document.getElementById("eventKind").value,evId=document.getElementById("eventId").value;
+var obj={id:evId||id(),kind:kind,title:document.getElementById("eventTitle").value.trim(),date:document.getElementById("eventDate").value,notes:document.getElementById("eventNotes").value.trim()};
+if(!obj.title||!obj.date){toast("Rellena el nombre y la fecha.");return}
+if(kind==="exam"){obj.subject=document.getElementById("eventSubject").value;obj.time=document.getElementById("eventTime").value;obj.priority=document.getElementById("eventPriority").value;obj.type=document.getElementById("eventType").value;obj.done=evId?(storage.find(function(x){return x.id===evId})||{}).done||false:false}
+if(evId)storage=storage.map(function(v){return v.id===evId?obj:v});else storage.push(obj);
+save();closeForm();displayed=new Date(parseDate(obj.date).getFullYear(),parseDate(obj.date).getMonth(),1);selected=obj.date;render();toast(kind==="holiday"?"Día libre guardado":"Examen guardado correctamente");
+});
+document.querySelectorAll("[data-filter]").forEach(function(el){el.addEventListener("click",function(){filter=el.dataset.filter;renderExams()})});
+function download(name,text,type){var blob=new Blob([text],{type:type});var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000)}
+document.getElementById("exportBackup").addEventListener("click",function(){download("daw-planner-copia-"+key(today)+".json",JSON.stringify({version:1,events:storage},null,2),"application/json");toast("Copia de seguridad descargada")});
+document.getElementById("importBackup").addEventListener("click",function(){document.getElementById("backupFile").click()});
+document.getElementById("backupFile").addEventListener("change",function(e){var f=e.target.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){try{var d=JSON.parse(rd.result),arr=Array.isArray(d)?d:d.events;if(!Array.isArray(arr)||arr.some(function(x){return !validEvent(x)}))throw Error();if(!confirm("Se reemplazarán tus eventos actuales por los de la copia. ¿Continuar?"))return;storage=arr;save();render();toast("Copia importada correctamente")}catch(err){toast("No se pudo leer el archivo JSON")}};rd.readAsText(f);e.target.value=""});
+function icsDate(k,t){return k.replace(/-/g,"")+(t?"T"+t.replace(":","")+"00":"")}
+function icsEsc(s){return String(s||"").replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\r?\n/g,"\\n")}
+document.getElementById("exportIcs").addEventListener("click",function(){var out=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//DAW Planner//ES","CALSCALE:GREGORIAN","X-WR-CALNAME:DAW Planner"];storage.forEach(function(e){out.push("BEGIN:VEVENT","UID:"+e.id+"@daw-planner","DTSTAMP:"+icsDate(key(today),"00:00")+"Z","SUMMARY:"+icsEsc(e.title),"DESCRIPTION:"+icsEsc(e.notes||""));if(e.kind==="holiday"){out.push("DTSTART;VALUE=DATE:"+icsDate(e.date),"DTEND;VALUE=DATE:"+icsDate(key(addDay(parseDate(e.date),1))))}else{out.push("DTSTART:"+icsDate(e.date,e.time||"09:00"),"DTEND:"+icsDate(e.date,e.time||"09:00"))}out.push("END:VEVENT")});out.push("END:VCALENDAR");download("daw-planner-eventos.ics",out.join("\r\n"),"text/calendar");toast("Archivo .ics descargado")});
+renderWeek();render();
+})();
+</script>
+</body>
+</html>
