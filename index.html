@@ -1029,8 +1029,9 @@ try{
  }
 }catch(e){}
 if(cloudCredentials)cloudUi("Nube conectada en esta sesión","Comprobando datos cifrados y recuperando exámenes de otros dispositivos.");
-window.addEventListener("online",function(){if(cloudCredentials)runCloudSync(false)});
-document.addEventListener("visibilitychange",function(){if(!document.hidden&&cloudCredentials)runCloudSync(false)});
+window.addEventListener("online",function(){if(cloudCredentials&&!accountUser)runCloudSync(false);if(accountUser)runAccountSync(false)});
+document.addEventListener("visibilitychange",function(){if(document.hidden)return;if(cloudCredentials&&!accountUser)runCloudSync(false);if(accountUser)runAccountSync(false)});
+window.addEventListener("focus",function(){if(accountUser)runAccountSync(false)});
 
 
 /* Cuenta privada: Supabase Auth, row-level security y sincronización por usuario. */
