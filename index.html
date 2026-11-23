@@ -320,6 +320,43 @@ body{background:var(--bg);color:var(--ink);font-size:15px}
 .sync-panel{max-width:760px}
 @media(max-width:560px){.sync-status{padding:12px}.sync-actions .btn{flex:1}.sync-steps{padding-left:19px}}
 
+
+/* Cuentas separadas y sincronización segura con Supabase */
+.account-top-btn{border:1px solid #5b5a92;cursor:pointer;min-width:39px}
+.account-top-btn:hover{background:#4e478b}
+.account-main{max-width:760px}
+.account-state{display:flex;align-items:center;gap:13px;background:#1b2b42;border:1px solid #415a79;border-radius:14px;padding:15px;margin-bottom:20px}
+.account-state-ico{width:48px;height:48px;background:#31355f;display:grid;place-items:center;border-radius:13px;font-size:24px;flex-shrink:0}
+.account-state strong{font-size:15px;color:#f5f7ff;display:block;overflow-wrap:anywhere}
+.account-state span{font-size:12px;color:#b9cbe4;line-height:1.7;display:block;margin-top:4px}
+.account-notice{background:#26324b;border:1px solid #425d7c;padding:14px;border-radius:13px;color:#c8d8f0;font-size:12px;line-height:1.75;margin:15px 0}
+.account-notice.warning{background:#433426;border-color:#8c6a43;color:#ffe2b5}
+.account-notice strong{color:#fff}
+.account-tabs{display:flex;border:1px solid #425270;background:#121e32;border-radius:12px;padding:5px;gap:5px;margin:12px 0 19px}
+.account-tab{flex:1;border:0;background:transparent;color:#a9bcda;padding:13px;border-radius:9px;font-size:13px;font-weight:850}
+.account-tab.active{background:#4a397d;color:#fff}
+.account-form{display:grid;gap:14px}
+.account-field label{font-size:12px;color:#d7e3f4;font-weight:800;display:block;margin-bottom:8px}
+.account-field input{width:100%;background:#101b30;border:1px solid #50637f;border-radius:10px;padding:13px;color:#fff;font-size:14px}
+.account-field input::placeholder{color:#91a4bf}
+.account-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:6px}
+.account-actions .btn{min-width:155px}
+.account-setup{padding:19px;background:#182945;border:1px solid #50617c;border-radius:14px;margin-top:17px}
+.account-setup h3{margin:0 0 9px;font-size:16px}
+.account-setup p,.account-setup ol{color:#c2d2e7;font-size:12px;line-height:1.8}
+.account-setup a{color:#c9c1ff;font-weight:800;text-decoration:underline}
+.account-setup ol{padding-left:23px}
+.account-message{font-size:12px;line-height:1.7;color:#d1e0ff;padding:9px 0}
+.account-message.error{color:#ffbcb6}
+.account-message.ok{color:#b7f5d7}
+.account-section-title{font-size:17px;font-weight:830;color:#f5f8ff;margin:22px 0 10px}
+.account-tools{display:flex;flex-wrap:wrap;gap:9px}
+.account-tools .btn{white-space:normal}
+.account-link{background:transparent;border:0;color:#c7b9ff;font-size:12px;text-decoration:underline;padding:7px 0;font-weight:700}
+.account-hidden{display:none!important}
+.account-meta{color:#b7c6dd;font-size:12px;line-height:1.7;margin:9px 0 0}
+@media(max-width:560px){.account-main{padding:15px}.account-actions .btn{flex:1}.account-state{padding:12px}}
+
 </style>
 </head>
 <body>
@@ -334,12 +371,13 @@ body{background:var(--bg);color:var(--ink);font-size:15px}
     <button class="nav-btn" data-view="examenes" aria-label="Exámenes"><span class="nav-ico">✎</span><span class="nav-label">Exámenes</span></button>
     <button class="nav-btn" data-view="festivos" aria-label="Festivos"><span class="nav-ico">☼</span><span class="nav-label">Festivos</span></button>
     <button class="nav-btn" data-view="nube" aria-label="Sincronización en la nube"><span class="nav-ico">☁</span><span class="nav-label">Sincronización</span></button>
+    <button class="nav-btn" data-view="cuenta" aria-label="Mi cuenta"><span class="nav-ico">♙</span><span class="nav-label">Mi cuenta</span></button>
   </nav>
   <div class="sidebar-bottom"><span class="status-dot"></span><b>Curso DAW1M · 2026/27</b><p>Horario adaptado a tu grupo de Programación con Jaime Bocío.</p></div>
 </aside>
 <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
 <main class="main">
-  <header class="topbar"><div class="top-left"><button type="button" id="mobileMenuToggle" class="mobile-menu-btn" aria-label="Abrir menú" aria-controls="sidebar" aria-expanded="false">☰</button><div class="crumb">Mi espacio <span style="padding:0 6px">/</span> <strong id="breadNow">Inicio</strong></div></div><div class="top-actions"><div class="date-pill" id="todayLabel"></div><div class="avatar" aria-label="Estudiante">DAW</div></div></header>
+  <header class="topbar"><div class="top-left"><button type="button" id="mobileMenuToggle" class="mobile-menu-btn" aria-label="Abrir menú" aria-controls="sidebar" aria-expanded="false">☰</button><div class="crumb">Mi espacio <span style="padding:0 6px">/</span> <strong id="breadNow">Inicio</strong></div></div><div class="top-actions"><div class="date-pill" id="todayLabel"></div><button type="button" class="avatar account-top-btn" id="accountTopBtn" aria-label="Mi cuenta" title="Iniciar sesión">DAW</button></div></header>
   <section id="view-inicio" class="view active">
     <div class="headline"><div><div class="eyebrow">TU AGENDA PERSONAL</div><h1>Organiza tu semana ✨</h1><p class="subtitle">Tus clases, exámenes y días libres, todo en un mismo lugar.</p></div><button class="btn primary add-exam">＋ Añadir examen</button></div>
     <div class="hero"><div><span class="hero-label">CURSO 2026 — 2027</span><h2>Todo listo para un gran curso.</h2><p>Menos sorpresas, más tiempo para estudiar lo importante.</p></div><div class="hero-deco" aria-hidden="true">📚</div></div>
@@ -354,10 +392,49 @@ body{background:var(--bg);color:var(--ink);font-size:15px}
     <section class="exam-section" aria-labelledby="futureExamTitle"><div class="section-toolbar"><h2 id="futureExamTitle">📅 Próximos exámenes</h2><span class="counter-badge" id="futureExamCount">0 pendientes</span></div><div class="exams-grid" id="examList"></div></section>
     <section class="exam-section past-section" aria-labelledby="pastExamTitle"><div class="section-toolbar"><h2 id="pastExamTitle">📝 Exámenes realizados</h2><span class="counter-badge" id="pastExamCount">0 realizados</span></div><p class="section-explanation">Cuando termine el día de un examen, aparecerá aquí automáticamente. Escribe tu nota del 0 al 10 y pulsa <b>Guardar nota</b>.</p><div class="exams-grid" id="pastExamList"></div></section>
     <div class="backup-tools"><button class="btn small" id="exportBackup">↓ Exportar copia de seguridad</button><button class="btn small" id="importBackup">↑ Importar copia</button><input type="file" id="backupFile" accept="application/json,.json" hidden><button class="btn small" id="exportIcs">▣ Exportar calendario (.ics)</button></div>
-    <p class="section-note">La información se guarda en el almacenamiento local del navegador, no en GitHub. Para usarla en otro dispositivo, exporta una copia e impórtala allí. Evita la navegación privada y no borres los datos del sitio si quieres conservar tus exámenes.</p>
+    <p class="section-note" id="storageHelpText">Tus exámenes están guardados en este navegador. Si conectas una cuenta en «Mi cuenta», también podrás sincronizarlos con otros dispositivos. No borres los datos del sitio sin descargar antes una copia.</p>
   </section>
   <section id="view-festivos" class="view"><div class="headline"><div><div class="eyebrow">CALENDARIO ESCOLAR</div><h1>Festivos y vacaciones</h1><p class="subtitle">Cataluña y Reus · Curso escolar 2026–2027.</p></div><button class="btn primary add-holiday">＋ Día libre del centro</button></div><div class="warn">ℹ️ Incluye festivos oficiales y vacaciones escolares. <b>No incluye los 4 días de libre disposición de tu instituto</b> porque dependen del centro. Puedes añadirlos con el botón superior. La fecha final de clases de FP también depende del centro.</div><div class="holiday-grid" id="holidayList"></div><div class="source-row"><a href="https://web.gencat.cat/ca/ciutadania/educacio-formacio/calendari-escolar-catalunya" target="_blank" rel="noopener">↗ Calendario escolar oficial</a><a href="https://treball.gencat.cat/ca/ambits/relacions_laborals/ci/calendari_laboral/calendari-festes-2027/" target="_blank" rel="noopener">↗ Festivos oficiales 2027</a><a href="https://seuelectronica.dipta.cat/calendari-festius?p_p_id=2_WAR_kaleodesignerportlet" target="_blank" rel="noopener">↗ Festivos Reus 2026</a></div></section>
 
+
+  <section id="view-cuenta" class="view">
+    <div class="headline"><div><div class="eyebrow">CUENTAS PRIVADAS</div><h1>Mi cuenta</h1><p class="subtitle">Cada persona tiene su propia agenda y sus propias notas. Puedes usar tu cuenta en el ordenador y en el móvil.</p></div></div>
+    <div class="panel account-main">
+      <div class="account-state" role="status" aria-live="polite"><div class="account-state-ico">👤</div><div><strong id="accountStatusTitle">Comprobando cuentas…</strong><span id="accountStatusInfo">Tus exámenes locales siguen guardados.</span></div></div>
+      <div class="account-notice"><strong>Tranquilo: no se borra nada.</strong> Los exámenes que ya tienes siguen en el almacenamiento original de este navegador. Al entrar por primera vez con tu cuenta te preguntaremos si quieres añadirlos a ella. Tu amigo podrá elegir que no, para empezar con su agenda vacía.</div>
+      <div id="accountSetup" class="account-setup account-hidden">
+        <h3>⚙️ Falta activar la base de datos de cuentas</h3>
+        <p>La web está preparada, pero para registrar usuarios reales hace falta que el dueño conecte un proyecto Supabase. GitHub Pages por sí solo no permite guardar cuentas de forma privada.</p>
+        <ol>
+          <li>Crea un proyecto en <a href="https://supabase.com/dashboard" target="_blank" rel="noopener noreferrer">Supabase</a>.</li>
+          <li>Ejecuta el código del archivo <a href="https://github.com/MauriNiOr/agenda/blob/main/supabase.sql" target="_blank" rel="noopener noreferrer">supabase.sql</a> en el SQL Editor.</li>
+          <li>Copia la Project URL y la <strong>Publishable key</strong> en <a href="https://github.com/MauriNiOr/agenda/blob/main/config.js" target="_blank" rel="noopener noreferrer">config.js</a> de GitHub.</li>
+          <li>Activa el registro por correo y la URL de redirección <code>https://maurinior.github.io/agenda/</code>.</li>
+        </ol>
+        <p>Instrucciones completas: <a href="https://github.com/MauriNiOr/agenda/blob/main/CONFIGURACION_CUENTAS.md" target="_blank" rel="noopener noreferrer">CONFIGURACION_CUENTAS.md</a>. <strong>¡Nunca publiques una secret key!</strong></p>
+      </div>
+      <div id="accountAnonymous">
+        <div class="account-tabs" role="tablist" aria-label="Modo de acceso">
+          <button class="account-tab active" id="accountTabLogin" type="button" aria-selected="true">Iniciar sesión</button>
+          <button class="account-tab" id="accountTabRegister" type="button" aria-selected="false">Registrarse</button>
+        </div>
+        <form id="accountForm" class="account-form">
+          <div class="account-field"><label for="authEmail">Correo electrónico</label><input id="authEmail" name="email" type="email" placeholder="tucorreo@ejemplo.com" autocomplete="email" required maxlength="180"></div>
+          <div class="account-field"><label for="authPassword">Contraseña de tu cuenta</label><input id="authPassword" name="password" type="password" minlength="8" autocomplete="current-password" placeholder="Mínimo 8 caracteres" required></div>
+          <div class="account-field account-hidden" id="accountPasswordRepeatField"><label for="authRepeatPassword">Repite tu contraseña</label><input id="authRepeatPassword" name="repeat" type="password" minlength="8" autocomplete="new-password" placeholder="Repite tu contraseña"></div>
+          <div class="account-actions"><button type="submit" class="btn primary" id="authSubmit">Entrar</button><button class="account-link" id="authForgot" type="button">¿Has olvidado la contraseña?</button></div>
+        </form>
+      </div>
+      <div id="accountLoggedIn" class="account-hidden">
+        <h2 class="account-section-title">✓ Sesión iniciada</h2>
+        <p class="account-meta">Tu agenda está vinculada a <strong id="accountEmail">—</strong>. Tu amigo tendrá una cuenta completamente independiente y no podrá ver tus eventos.</p>
+        <div class="account-actions"><button type="button" class="btn primary" id="accountSyncNow">↻ Sincronizar ahora</button><button type="button" class="btn" id="accountLogout">Cerrar sesión</button></div>
+        <div class="account-tools" style="margin-top:17px"><button type="button" class="btn small" id="accountDownload">↓ Descargar mi copia</button><button type="button" class="btn small" id="accountToExams">Ver mis exámenes</button></div>
+      </div>
+      <p id="authFeedback" class="account-message" role="status" aria-live="polite"></p>
+      <p class="account-meta">La contraseña se gestiona con Supabase Auth; no se guarda en GitHub ni aparece en el código de esta web. Los datos de cada usuario quedan restringidos por las reglas de acceso de la base de datos.</p>
+    </div>
+  </section>
   <section id="view-nube" class="view">
     <div class="headline"><div><div class="eyebrow">TUS EXÁMENES EN TODOS LOS DISPOSITIVOS</div><h1>Sincronización en la nube ☁</h1><p class="subtitle">Conserva tus exámenes, días libres y notas en el ordenador y en el móvil.</p></div></div>
     <div class="panel sync-panel">
@@ -403,6 +480,8 @@ body{background:var(--bg);color:var(--ink);font-size:15px}
  </form>
 </div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="./config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (function(){
 "use strict";
@@ -472,10 +551,13 @@ function copyEvent(ev){return JSON.parse(JSON.stringify(ev))}
 function eventWithoutStamp(e){var v=copyEvent(e);delete v._updatedAt;return JSON.stringify(v)}
 var lastLocalEvents=new Map(storage.map(function(e){return [e.id,eventWithoutStamp(e)]}));
 var localMutationCounter=0;
+var accountUser=null,authClient=null,accountSyncTimer=null,accountSyncInProgress=false,accountSyncQueued=false;
+function activeStorageKey(){return accountUser?STORAGE_KEY+":user:"+accountUser.id:STORAGE_KEY}
+function activeDeletedKey(){return accountUser?DELETED_KEY+":user:"+accountUser.id:DELETED_KEY}
 function saveLocalWithoutSync(){
  try{
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(storage));
-  localStorage.setItem(DELETED_KEY,JSON.stringify(deletedEvents));
+  localStorage.setItem(activeStorageKey(),JSON.stringify(storage));
+  localStorage.setItem(activeDeletedKey(),JSON.stringify(deletedEvents));
   lastLocalEvents=new Map(storage.map(function(e){return [e.id,eventWithoutStamp(e)]}));
   return true;
  }catch(e){toast("No se pudo guardar en este navegador. Descarga una copia de seguridad.");return false}
@@ -491,7 +573,7 @@ function save(){
   }
  });
  lastLocalEvents.forEach(function(_,id){if(!present.has(id))deletedEvents[id]=Math.max(Number(deletedEvents[id]||0),t)});
- if(saveLocalWithoutSync())scheduleCloudSync();
+ if(saveLocalWithoutSync()){if(accountUser)scheduleAccountSync();else scheduleCloudSync()}
 }
 function startOfWeek(d){var x=new Date(d);x.setHours(0,0,0,0);x.setDate(x.getDate()-((x.getDay()+6)%7));return x}
 var displayed=startOfWeek(today),selected=key(today),activeView="inicio";
@@ -499,8 +581,8 @@ document.getElementById("todayLabel").textContent=today.toLocaleDateString("es-E
 var options=subjects.map(function(s){return '<option value="'+s.id+'">'+safe(s.name)+'</option>'}).join("");
 document.getElementById("eventSubject").innerHTML=options;
 function toast(message){var el=document.getElementById("toast");el.textContent=message;el.classList.add("show");clearTimeout(toast._timer);toast._timer=setTimeout(function(){el.classList.remove("show")},3500)}
-function titleFor(v){return ({inicio:"Inicio",calendario:"Calendario",horario:"Mi horario",examenes:"Exámenes",festivos:"Festivos",nube:"Sincronización"})[v]}
-function showView(v){activeView=v;document.querySelectorAll(".view").forEach(function(el){el.classList.toggle("active",el.id==="view-"+v)});document.querySelectorAll(".nav-btn").forEach(function(el){el.classList.toggle("active",el.dataset.view===v)});document.getElementById("breadNow").textContent=titleFor(v);window.scrollTo({top:0,behavior:"smooth"});render()}
+function titleFor(v){return ({inicio:"Inicio",calendario:"Calendario",horario:"Mi horario",examenes:"Exámenes",festivos:"Festivos",nube:"Sincronización",cuenta:"Mi cuenta"})[v]}
+function showView(v){if(v==="nube"&&accountUser)v="cuenta";activeView=v;document.querySelectorAll(".view").forEach(function(el){el.classList.toggle("active",el.id==="view-"+v)});document.querySelectorAll(".nav-btn").forEach(function(el){el.classList.toggle("active",el.dataset.view===v)});document.getElementById("breadNow").textContent=titleFor(v);window.scrollTo({top:0,behavior:"smooth"});render()}
 document.querySelectorAll("[data-view]").forEach(function(el){el.addEventListener("click",function(){showView(el.dataset.view)})});
 
 var appEl=document.querySelector(".app"),sidebarBtn=document.getElementById("sidebarToggle"),mobileBtn=document.getElementById("mobileMenuToggle");
@@ -853,6 +935,7 @@ function mergeCloudData(remoteData){
 }
 function snapshotsEqual(a,b){return JSON.stringify(a)===JSON.stringify(b)}
 function persistCloudMerge(merged){
+ if(accountUser)return;
  // Preserva una copia fija de la agenda anterior en el navegador.
  try{
   if(!localStorage.getItem(CLOUD_BACKUP_KEY)){
@@ -865,7 +948,7 @@ function persistCloudMerge(merged){
  render();
 }
 async function runCloudSync(announce){
- if(!cloudCredentials)return;
+ if(accountUser||!cloudCredentials)return;
  if(cloudInProgress){cloudQueued=true;return}
  cloudInProgress=true;clearTimeout(cloudTimer);
  cloudUi("Sincronizando con GitHub…","Leyendo los datos cifrados, combinando las agendas y guardando una copia.");
@@ -937,15 +1020,251 @@ document.getElementById("cloudGoExams").addEventListener("click",function(){show
 try{
  var savedCredentials=JSON.parse(sessionStorage.getItem(CLOUD_CREDENTIALS_KEY)||"null");
  if(savedCredentials&&typeof savedCredentials.token==="string"&&typeof savedCredentials.password==="string"){
-  cloudCredentials=savedCredentials;
-  setTimeout(function(){runCloudSync(false)},1000);
+  // No reconectar automáticamente con token antiguo. Se puede conectar manualmente en modo invitado.
+  sessionStorage.removeItem(CLOUD_CREDENTIALS_KEY);
  }
 }catch(e){}
 if(cloudCredentials)cloudUi("Nube conectada en esta sesión","Comprobando datos cifrados y recuperando exámenes de otros dispositivos.");
 window.addEventListener("online",function(){if(cloudCredentials)runCloudSync(false)});
 document.addEventListener("visibilitychange",function(){if(!document.hidden&&cloudCredentials)runCloudSync(false)});
 
+
+/* Cuenta privada: Supabase Auth, row-level security y sincronización por usuario. */
+var authMode="login",authSwitching=false;
+function accountFeedback(msg,error){
+ var el=document.getElementById("authFeedback");
+ el.textContent=msg||"";el.classList.toggle("error",!!error);el.classList.toggle("ok",!!msg&&!error);
+}
+function accountStatus(title,details){
+ document.getElementById("accountStatusTitle").textContent=title;
+ document.getElementById("accountStatusInfo").textContent=details;
+}
+function accountConfigured(){
+ var cfg=window.DAW_SUPABASE_CONFIG||{};
+ return /^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/.test(String(cfg.url||""))&&
+ typeof cfg.publishableKey==="string"&&cfg.publishableKey.length>18;
+}
+function refreshAccountUi(){
+ var connected=!!accountUser,enabled=!!authClient;
+ document.getElementById("accountSetup").classList.toggle("account-hidden",enabled);
+ document.getElementById("accountAnonymous").classList.toggle("account-hidden",connected);
+ document.getElementById("accountLoggedIn").classList.toggle("account-hidden",!connected);
+ document.getElementById("authSubmit").disabled=!enabled;
+ document.getElementById("accountEmail").textContent=connected?(accountUser.email||"Cuenta de usuario"):"—";
+ var top=document.getElementById("accountTopBtn");
+ top.textContent=connected?(accountUser.email||"?").slice(0,2).toUpperCase():"DAW";
+ top.title=connected?"Mi cuenta: "+(accountUser.email||""):"Iniciar sesión";
+ document.getElementById("storageHelpText").textContent=connected?
+  "Tus exámenes se guardan en la copia local de esta cuenta y se sincronizan con Supabase cuando hay conexión. En Exámenes puedes exportar una copia.":
+  "Tus exámenes antiguos siguen guardados en este navegador. Al entrar con tu cuenta, podrás elegir si deseas copiarlos. Tu amigo tendrá sus propios datos.";
+ if(!enabled)accountStatus("Registro pendiente de activar","Falta configurar Supabase. Mientras tanto tu agenda local sigue funcionando.");
+ else if(!connected)accountStatus("Sin iniciar sesión","Puedes seguir usando la agenda local o crear una cuenta cuando quieras.");
+}
+function loadLocalScope(){
+ var saved=[],deleted={};
+ try{var s=JSON.parse(localStorage.getItem(activeStorageKey())||"[]");if(Array.isArray(s))saved=s.filter(validEvent)}catch(e){}
+ try{var t=JSON.parse(localStorage.getItem(activeDeletedKey())||"{}");if(t&&typeof t==="object"&&!Array.isArray(t))deleted=t}catch(e){}
+ storage=saved;deletedEvents=deleted;
+ lastLocalEvents=new Map(storage.map(function(e){return [e.id,eventWithoutStamp(e)]}));
+}
+function autoBackupOldGuest(){
+ try{
+  var k="daw-planner-guest-before-accounts-v1";
+  if(!localStorage.getItem(k)){
+   localStorage.setItem(k,JSON.stringify({savedAt:new Date().toISOString(),events:JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]")}));
+  }
+ }catch(e){}
+}
+async function switchAccountSession(session){
+ var newUser=session&&session.user?session.user:null;
+ if((!newUser&&!accountUser)||(newUser&&accountUser&&newUser.id===accountUser.id))return;
+ clearTimeout(accountSyncTimer);accountSyncQueued=false;
+ if(newUser){
+  // Desconectar el método GitHub anterior para que nunca mezcle las cuentas.
+  cloudCredentials=null;cloudQueued=false;clearTimeout(cloudTimer);
+  try{sessionStorage.removeItem(CLOUD_CREDENTIALS_KEY)}catch(e){}
+  autoBackupOldGuest();
+  accountUser=newUser;
+  loadLocalScope();
+  var guestEvents=[];
+  try{var v=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");if(Array.isArray(v))guestEvents=v.filter(validEvent)}catch(e){}
+  var askedKey="daw-planner-local-import-choice-"+newUser.id;
+  var asked=null;try{asked=localStorage.getItem(askedKey)}catch(e){}
+  if(asked===null&&guestEvents.length){
+   var importOld=confirm("Hay "+guestEvents.length+" eventos guardados en este navegador antes de crear cuentas. ¿Quieres COPIARLOS a la cuenta "+(newUser.email||"actual")+"? No se borrarán de su ubicación original. Si esta es la cuenta de tu amigo, elige CANCELAR para no mezclar datos.");
+   try{localStorage.setItem(askedKey,importOld?"yes":"no")}catch(e){}
+   if(importOld){
+    var existingIds=new Set(storage.map(function(e){return e.id}));
+    guestEvents.forEach(function(e){if(!existingIds.has(e.id)){storage.push(copyEvent(e));existingIds.add(e.id)}});
+    save();
+    toast("Tus exámenes anteriores se han copiado sin borrarlos.");
+   }
+  }
+  accountStatus("✓ Sesión iniciada","Conectado como "+(newUser.email||"usuario")+". Preparando la agenda privada.");
+  refreshAccountUi();render();
+  runAccountSync(false);
+ }else{
+  accountUser=null;accountStatus("Sesión cerrada","Tus datos personales siguen asociados a tu cuenta. Has vuelto a la agenda local del navegador.");
+  loadLocalScope();refreshAccountUi();render();
+ }
+}
+function setAuthMode(v){
+ authMode=v;
+ var signup=v==="register";
+ document.getElementById("accountTabLogin").classList.toggle("active",!signup);
+ document.getElementById("accountTabRegister").classList.toggle("active",signup);
+ document.getElementById("accountTabLogin").setAttribute("aria-selected",String(!signup));
+ document.getElementById("accountTabRegister").setAttribute("aria-selected",String(signup));
+ document.getElementById("accountPasswordRepeatField").classList.toggle("account-hidden",!signup);
+ document.getElementById("authRepeatPassword").required=signup;
+ document.getElementById("authPassword").autocomplete=signup?"new-password":"current-password";
+ document.getElementById("authSubmit").textContent=signup?"Crear cuenta":"Entrar";
+ document.getElementById("authForgot").classList.toggle("account-hidden",signup);
+ accountFeedback("");
+}
+document.getElementById("accountTabLogin").addEventListener("click",function(){setAuthMode("login")});
+document.getElementById("accountTabRegister").addEventListener("click",function(){setAuthMode("register")});
+document.getElementById("accountTopBtn").addEventListener("click",function(){showView("cuenta")});
+document.getElementById("accountForm").addEventListener("submit",async function(e){
+ e.preventDefault();
+ if(!authClient){accountFeedback("Primero debes activar la base de datos de cuentas.",true);return}
+ var email=document.getElementById("authEmail").value.trim(),pass=document.getElementById("authPassword").value;
+ if(pass.length<8){accountFeedback("La contraseña debe tener al menos 8 caracteres.",true);return}
+ if(authMode==="register"&&pass!==document.getElementById("authRepeatPassword").value){
+  accountFeedback("Las contraseñas no coinciden.",true);return;
+ }
+ var btn=document.getElementById("authSubmit");btn.disabled=true;
+ accountFeedback(authMode==="register"?"Creando la cuenta…":"Iniciando sesión…");
+ try{
+  var res=authMode==="register"?
+   await authClient.auth.signUp({email:email,password:pass,options:{emailRedirectTo:"https://maurinior.github.io/agenda/"}}):
+   await authClient.auth.signInWithPassword({email:email,password:pass});
+  if(res.error)throw res.error;
+  document.getElementById("authPassword").value="";
+  document.getElementById("authRepeatPassword").value="";
+  if(authMode==="register"&&!res.data.session)accountFeedback("Cuenta creada. Comprueba tu correo para confirmarla y luego inicia sesión.");
+  else{
+   accountFeedback("Sesión iniciada.");
+   if(res.data.session)await switchAccountSession(res.data.session);
+  }
+ }catch(err){accountFeedback("No se pudo acceder: "+String(err.message||err),true)}
+ finally{btn.disabled=!authClient}
+});
+document.getElementById("authForgot").addEventListener("click",async function(){
+ if(!authClient){accountFeedback("Primero hay que activar las cuentas.",true);return}
+ var email=document.getElementById("authEmail").value.trim();
+ if(!email){accountFeedback("Escribe tu correo en el formulario para recuperar la contraseña.",true);return}
+ try{
+  var res=await authClient.auth.resetPasswordForEmail(email,{redirectTo:"https://maurinior.github.io/agenda/"});
+  if(res.error)throw res.error;
+  accountFeedback("Si existe una cuenta para ese correo, recibirás un enlace para restablecer tu contraseña.");
+ }catch(e){accountFeedback(String(e.message||e),true)}
+});
+document.getElementById("accountLogout").addEventListener("click",async function(){
+ if(!authClient)return;
+ await runAccountSync(true);
+ var result=await authClient.auth.signOut();
+ if(result.error)accountFeedback(String(result.error.message),true);
+ else{switchAccountSession(null);toast("Sesión cerrada. Tus exámenes no se han borrado.")}
+});
+document.getElementById("accountSyncNow").addEventListener("click",function(){runAccountSync(true)});
+document.getElementById("accountToExams").addEventListener("click",function(){showView("examenes")});
+document.getElementById("accountDownload").addEventListener("click",function(){
+ download("agenda-privada-"+key(today)+".json",JSON.stringify({version:1,events:storage},null,2),"application/json");
+ toast("Copia de tus exámenes descargada");
+});
+function scheduleAccountSync(){
+ if(!accountUser||!authClient)return;
+ clearTimeout(accountSyncTimer);
+ accountSyncTimer=setTimeout(function(){runAccountSync(false)},1200);
+}
+function persistAccountMerge(merged){
+ if(!accountUser)return;
+ // Se mantiene un respaldo por usuario antes de escribir cualquier mezcla.
+ try{
+  var bk="daw-planner-account-before-sync-"+accountUser.id;
+  if(!localStorage.getItem(bk))localStorage.setItem(bk,JSON.stringify({savedAt:new Date().toISOString(),events:storage}));
+ }catch(e){}
+ storage=merged.events;deletedEvents=merged.deleted;
+ saveLocalWithoutSync();
+ render();
+}
+async function runAccountSync(announce){
+ if(!accountUser||!authClient)return;
+ if(accountSyncInProgress){accountSyncQueued=true;return}
+ clearTimeout(accountSyncTimer);accountSyncInProgress=true;
+ var userId=accountUser.id,initialChanges=localMutationCounter;
+ accountStatus("Sincronizando con tu cuenta…","Comprobando tus datos del navegador y la nube.");
+ try{
+  var successful=false;
+  for(var attempt=0;attempt<5;attempt++){
+   if(!accountUser||accountUser.id!==userId)return;
+   var fetched=await authClient.from("planner_data").select("revision,events,deleted").eq("user_id",userId).maybeSingle();
+   if(fetched.error)throw fetched.error;
+   if(!accountUser||accountUser.id!==userId)return;
+   var row=fetched.data,remote={events:row&&Array.isArray(row.events)?row.events:[],deleted:row&&row.deleted&&typeof row.deleted==="object"?row.deleted:{}};
+   var merged=mergeCloudData(remote);
+   var dirty=JSON.stringify(merged.events)!==JSON.stringify(remote.events)||JSON.stringify(merged.deleted)!==JSON.stringify(remote.deleted);
+   if(dirty){
+    if(!accountUser||accountUser.id!==userId)return;
+    var res=await authClient.rpc("planner_save",{expected_revision:row?row.revision:0,next_events:merged.events,next_deleted:merged.deleted});
+    if(res.error)throw res.error;
+    if(!res.data)continue; // Otro dispositivo guardó primero. Releer y combinar.
+   }
+   if(!accountUser||accountUser.id!==userId)return;
+   if(initialChanges!==localMutationCounter){
+    merged=mergeCloudData(merged);
+    accountSyncQueued=true;
+   }
+   persistAccountMerge(merged);
+   successful=true;break;
+  }
+  if(!successful)throw Error("Otro dispositivo modificó la agenda. Inténtalo de nuevo.");
+  accountStatus("✓ Agenda sincronizada","Cuenta "+(accountUser.email||"")+" · "+new Date().toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}));
+  if(announce)toast("Tus exámenes y notas ya están sincronizados con tu cuenta.");
+ }catch(e){
+  accountStatus("⚠ Datos guardados localmente","No se ha podido conectar: "+String(e.message||e)+". Tus datos siguen en este navegador.");
+  if(announce)toast("No se pudo sincronizar. Tus datos locales no se han borrado.");
+ }finally{
+  accountSyncInProgress=false;
+  if(accountSyncQueued){accountSyncQueued=false;scheduleAccountSync()}
+ }
+}
+async function initAccountAuth(){
+ if(!accountConfigured()){
+  refreshAccountUi();
+  accountFeedback("Pendiente de conectar Supabase. Consulta la guía de configuración.");
+  return;
+ }
+ if(!window.supabase||typeof window.supabase.createClient!=="function"){
+  refreshAccountUi();accountFeedback("No se ha podido cargar la biblioteca de inicio de sesión.",true);return;
+ }
+ try{
+  var config=window.DAW_SUPABASE_CONFIG;
+  authClient=window.supabase.createClient(config.url,config.publishableKey,{
+   auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}
+  });
+  refreshAccountUi();
+  authClient.auth.onAuthStateChange(function(event,session){
+   setTimeout(function(){switchAccountSession(session)},0);
+   if(event==="PASSWORD_RECOVERY"){
+    setTimeout(async function(){
+     var newPass=prompt("Escribe tu nueva contraseña (mínimo 8 caracteres). No se enviará al chat.");
+     if(!newPass)return;
+     if(newPass.length<8){accountFeedback("La contraseña debe tener al menos 8 caracteres.",true);return}
+     var result=await authClient.auth.updateUser({password:newPass});
+     accountFeedback(result.error?result.error.message:"Contraseña actualizada.",!!result.error);
+    },0);
+   }
+  });
+  var sessionResult=await authClient.auth.getSession();
+  if(sessionResult.error)throw sessionResult.error;
+  await switchAccountSession(sessionResult.data.session);
+ }catch(e){accountFeedback("No se ha podido activar la conexión: "+String(e.message||e),true)}
+}
+
 renderWeek();render();
+initAccountAuth();
 })();
 </script>
 </body>
