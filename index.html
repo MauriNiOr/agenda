@@ -199,24 +199,121 @@ body{background:var(--bg);color:var(--ink);font-size:15px}
 @media(max-width:1250px){.timetable-grid{min-width:1150px}.week-panel{padding:19px}}
 @media(max-width:800px){.week-panel{padding:15px}.week-supplement{grid-template-columns:1fr;gap:14px}.week-range{font-size:17px}.timetable-grid{grid-template-columns:84px repeat(5,minmax(190px,1fr));min-width:1034px;grid-template-rows:74px 134px 134px 34px 134px 134px 34px 134px 134px}.tt-class{padding:9px}.tt-class .tt-class-title{font-size:12px}.tt-class.tt-program .tt-class-title{font-size:13px}}
 @media(max-width:560px){.week-head{gap:12px}.week-chooser{gap:6px}.week-chooser .arrow{width:37px;height:37px}.tt-time strong{font-size:12px}.tt-time{font-size:11px}.tt-day-head .tt-name{font-size:13px}}
+
+/* Menú lateral plegable y horario adaptable a la pantalla */
+.sidebar{transition:width .24s ease,padding .24s ease;z-index:12}
+.main{max-width:none;min-width:0;flex:1;width:auto;padding:25px clamp(12px,1.7vw,30px) 56px;transition:width .24s ease,padding .24s ease}
+.app{width:100%;min-width:0}
+.brand{padding-right:42px}
+.sidebar-toggle{position:absolute;top:31px;right:11px;width:34px;height:34px;border-radius:10px;border:1px solid #4d5a79;display:grid;place-items:center;background:#2a3550;color:#f4f6ff;font-size:20px;z-index:2;line-height:1}
+.sidebar-toggle:hover{background:#465476}
+.nav-label{font-size:14px;white-space:nowrap}
+.sidebar .menu{min-width:0}
+.nav-btn{white-space:nowrap}
+.app.nav-collapsed .sidebar{width:76px;padding:28px 9px}
+.app.nav-collapsed .brand{padding:0;height:53px}
+.app.nav-collapsed .brand-icon,.app.nav-collapsed .brand-text,.app.nav-collapsed .nav-title,.app.nav-collapsed .sidebar-bottom,.app.nav-collapsed .nav-label{display:none}
+.app.nav-collapsed .sidebar-toggle{top:28px;right:19px}
+.app.nav-collapsed .sidebar .nav-btn{width:54px;height:48px;padding:0;justify-content:center;gap:0}
+.app.nav-collapsed .nav-ico{font-size:21px;width:auto}
+.app.nav-collapsed .menu{display:flex;flex-direction:column;gap:5px}
+.app.nav-collapsed .menu .nav-btn:first-child{margin-top:2px}
+.top-left{display:flex;align-items:center;gap:11px;min-width:0}
+.mobile-menu-btn{display:none;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid #4b5d7b;background:#263550;border-radius:11px;color:#f4f6ff;font-size:21px}
+.menu-overlay{display:none}
+#homeCalendar,#fullCalendar{max-width:100%;min-width:0}
+.week-panel{padding:clamp(12px,1.35vw,22px)}
+.week-scroll{overflow:visible;padding:0;max-width:100%}
+.timetable-grid{width:100%;min-width:0;grid-template-columns:clamp(66px,6.2vw,88px) repeat(5,minmax(0,1fr));grid-template-rows:68px repeat(2,140px) 29px repeat(2,140px) 29px repeat(2,140px)}
+.tt-corner{font-size:11px}
+.tt-day-head .tt-name{font-size:clamp(11px,1vw,14px)}
+.tt-day-head .tt-date{font-size:11px}
+.tt-time{font-size:11px}
+.tt-time strong{font-size:12px}
+.tt-class{padding:9px clamp(5px,.65vw,11px);gap:3px;margin:3px;border-radius:7px;border-left-width:3px}
+.tt-class .tt-class-title,.tt-class.tt-program .tt-class-title{font-size:clamp(10px,.92vw,13px);line-height:1.28}
+.tt-class .tt-class-teacher{font-size:clamp(9px,.78vw,11px);line-height:1.35}
+.tt-class .tt-class-room{font-size:clamp(9px,.73vw,10px);line-height:1.35}
+.tt-class .tt-exam-badge{font-size:9px;padding:3px 5px;white-space:normal}
+.tt-holiday{padding:10px;font-size:11px}
+.tt-holiday strong{font-size:13px}
+.tt-exam-only{padding:7px 5px}
+.tt-exam-only b{font-size:11px}
+.week-head{gap:12px}
+.week-range{font-size:clamp(16px,1.8vw,22px)}
+.mobile-week-list{display:none}
+.tt-instructions{margin-top:10px}
+@media(max-width:1150px) and (min-width:801px){
+ .main{padding:22px 12px 46px}
+ .week-panel{padding:11px}
+ .tt-class{margin:2px;padding:7px 4px}
+ .tt-class .tt-class-title,.tt-class.tt-program .tt-class-title{font-size:11px}
+ .tt-class .tt-class-teacher,.tt-class .tt-class-room{font-size:9px}
+ .timetable-grid{grid-template-columns:65px repeat(5,minmax(0,1fr));grid-template-rows:64px 148px 148px 27px 148px 148px 27px 148px 148px}
+ .week-chooser{gap:5px}
+}
+@media(max-width:800px){
+ .app{display:block}
+ .main,.app.nav-collapsed .main{width:100%;max-width:none;padding:18px 12px 48px}
+ .sidebar,.app.nav-collapsed .sidebar{position:fixed;left:0;top:0;bottom:0;width:270px;height:100vh;height:100dvh;padding:26px 15px;display:flex;flex-direction:column;transform:translateX(-105%);transition:transform .25s ease;z-index:55;box-shadow:15px 0 50px #0009;overflow-y:auto}
+ .app.nav-mobile-open .sidebar{transform:translateX(0)}
+ .sidebar .brand,.app.nav-collapsed .brand{display:flex;padding:0 44px 22px 0;height:auto}
+ .sidebar .brand-text,.sidebar .brand-icon,.sidebar .nav-title,.sidebar .sidebar-bottom,.sidebar .nav-label,
+ .app.nav-collapsed .sidebar .brand-text,.app.nav-collapsed .sidebar .brand-icon,.app.nav-collapsed .sidebar .nav-title,.app.nav-collapsed .sidebar .sidebar-bottom,.app.nav-collapsed .sidebar .nav-label{display:initial}
+ .sidebar .brand-icon,.app.nav-collapsed .sidebar .brand-icon{display:grid}
+ .sidebar .brand-text small{display:block}
+ .sidebar .nav-title,.app.nav-collapsed .sidebar .nav-title{display:block}
+ .sidebar .menu,.app.nav-collapsed .sidebar .menu{display:flex;flex-direction:column;gap:4px;margin:0;overflow:visible;width:100%}
+ .sidebar .nav-btn,.app.nav-collapsed .sidebar .nav-btn{display:flex;width:100%;height:auto;justify-content:flex-start;gap:12px;padding:13px 15px;font-size:14px;margin:0}
+ .sidebar .nav-ico,.app.nav-collapsed .sidebar .nav-ico{width:22px;font-size:18px}
+ .sidebar .sidebar-bottom,.app.nav-collapsed .sidebar .sidebar-bottom{display:block;margin-top:auto}
+ .sidebar-toggle,.app.nav-collapsed .sidebar-toggle{top:30px;right:13px}
+ .mobile-menu-btn{display:flex;flex:0 0 40px}
+ .menu-overlay{display:none;position:fixed;inset:0;background:#070d1dc9;z-index:54}
+ .app.nav-mobile-open .menu-overlay{display:block}
+ .topbar{gap:8px}
+ .tt-instructions{font-size:11px}
+ .timetable-grid{grid-template-columns:70px repeat(5,minmax(0,1fr));min-width:0}
+}
+@media(max-width:880px){
+ .week-scroll{display:none}
+ .mobile-week-list{display:grid;grid-template-columns:1fr;gap:13px}
+ .mobile-day-card{border:1px solid #3b4e6b;background:#192841;border-radius:14px;padding:13px;min-width:0}
+ .mobile-day-card.current{border-color:#b9a9ff;background:#232e4f}
+ .mobile-day-heading{display:flex;justify-content:space-between;gap:9px;align-items:center;padding:0 0 12px;border-bottom:1px solid #445570;margin-bottom:11px}
+ .mobile-day-heading button{border:0;background:transparent;color:#f1f5ff;text-align:left;font-size:15px;font-weight:850;padding:4px 0}
+ .mobile-day-heading small{color:#b9c7df;font-size:12px;font-weight:700}
+ .mobile-lesson{display:grid;grid-template-columns:83px minmax(0,1fr);align-items:stretch;gap:9px;margin:8px 0}
+ .mobile-time{font-size:11px;font-weight:740;color:#c6d6ec;padding:10px 3px;line-height:1.55;white-space:nowrap}
+ .mobile-class{display:flex;flex-direction:column;gap:4px;text-align:left;color:var(--sub-ink);background:var(--sub-bg);border:1px solid #66799855;border-left:4px solid var(--sub-ink);border-radius:9px;padding:12px;min-width:0}
+ .mobile-class strong{font-size:13px;line-height:1.35;overflow-wrap:anywhere}
+ .mobile-class span{font-size:11px;line-height:1.3}
+ .mobile-class em{font-style:normal;background:#743949;color:#ffe0e3;font-weight:800;font-size:10px;padding:4px 6px;border-radius:6px;align-self:flex-start;margin-top:3px}
+ .mobile-empty{font-size:12px;color:#9eb2cd;background:#202e44;border:1px dashed #405473;border-radius:9px;padding:13px;flex:1}
+ .mobile-holiday{color:#d7ffeb;background:#235340;padding:16px;border-radius:10px;font-weight:750;font-size:13px}
+ .mobile-weekend-note{font-size:11px;color:#aebdda;margin-top:5px}
+ .tt-exams-strip{margin-top:14px}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
-<aside class="sidebar">
-  <div class="brand"><span class="brand-icon">✦</span><div class="brand-text"><strong>DAW Planner</strong><small>Tu espacio de estudio</small></div></div>
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><span class="brand-icon">✦</span><div class="brand-text"><strong>DAW Planner</strong><small>Tu espacio de estudio</small></div></div><button type="button" id="sidebarToggle" class="sidebar-toggle" aria-label="Contraer menú lateral" aria-controls="sidebar" aria-expanded="true" title="Abrir o cerrar menú">☰</button>
   <div class="nav-title">MENÚ PRINCIPAL</div>
   <nav class="menu" aria-label="Navegación principal">
-    <button class="nav-btn active" data-view="inicio" aria-label="Inicio"><span class="nav-ico">▦</span> Inicio</button>
-    <button class="nav-btn" data-view="calendario" aria-label="Calendario"><span class="nav-ico">▣</span> Calendario</button>
-    <button class="nav-btn" data-view="horario" aria-label="Horario"><span class="nav-ico">◷</span> Mi horario</button>
-    <button class="nav-btn" data-view="examenes" aria-label="Exámenes"><span class="nav-ico">✎</span> Exámenes</button>
-    <button class="nav-btn" data-view="festivos" aria-label="Festivos"><span class="nav-ico">☼</span> Festivos</button>
+    <button class="nav-btn active" data-view="inicio" aria-label="Inicio"><span class="nav-ico">▦</span><span class="nav-label">Inicio</span></button>
+    <button class="nav-btn" data-view="calendario" aria-label="Calendario"><span class="nav-ico">▣</span><span class="nav-label">Calendario</span></button>
+    <button class="nav-btn" data-view="horario" aria-label="Horario"><span class="nav-ico">◷</span><span class="nav-label">Mi horario</span></button>
+    <button class="nav-btn" data-view="examenes" aria-label="Exámenes"><span class="nav-ico">✎</span><span class="nav-label">Exámenes</span></button>
+    <button class="nav-btn" data-view="festivos" aria-label="Festivos"><span class="nav-ico">☼</span><span class="nav-label">Festivos</span></button>
   </nav>
   <div class="sidebar-bottom"><span class="status-dot"></span><b>Curso DAW1M · 2026/27</b><p>Horario adaptado a tu grupo de Programación con Jaime Bocío.</p></div>
 </aside>
+<div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
 <main class="main">
-  <header class="topbar"><div class="crumb">Mi espacio <span style="padding:0 6px">/</span> <strong id="breadNow">Inicio</strong></div><div class="top-actions"><div class="date-pill" id="todayLabel"></div><div class="avatar" aria-label="Estudiante">DAW</div></div></header>
+  <header class="topbar"><div class="top-left"><button type="button" id="mobileMenuToggle" class="mobile-menu-btn" aria-label="Abrir menú" aria-controls="sidebar" aria-expanded="false">☰</button><div class="crumb">Mi espacio <span style="padding:0 6px">/</span> <strong id="breadNow">Inicio</strong></div></div><div class="top-actions"><div class="date-pill" id="todayLabel"></div><div class="avatar" aria-label="Estudiante">DAW</div></div></header>
   <section id="view-inicio" class="view active">
     <div class="headline"><div><div class="eyebrow">TU AGENDA PERSONAL</div><h1>Organiza tu semana ✨</h1><p class="subtitle">Tus clases, exámenes y días libres, todo en un mismo lugar.</p></div><button class="btn primary add-exam">＋ Añadir examen</button></div>
     <div class="hero"><div><span class="hero-label">CURSO 2026 — 2027</span><h2>Todo listo para un gran curso.</h2><p>Menos sorpresas, más tiempo para estudiar lo importante.</p></div><div class="hero-deco" aria-hidden="true">📚</div></div>
@@ -322,6 +419,36 @@ function toast(message){var el=document.getElementById("toast");el.textContent=m
 function titleFor(v){return ({inicio:"Inicio",calendario:"Calendario",horario:"Mi horario",examenes:"Exámenes",festivos:"Festivos"})[v]}
 function showView(v){activeView=v;document.querySelectorAll(".view").forEach(function(el){el.classList.toggle("active",el.id==="view-"+v)});document.querySelectorAll(".nav-btn").forEach(function(el){el.classList.toggle("active",el.dataset.view===v)});document.getElementById("breadNow").textContent=titleFor(v);window.scrollTo({top:0,behavior:"smooth"});render()}
 document.querySelectorAll("[data-view]").forEach(function(el){el.addEventListener("click",function(){showView(el.dataset.view)})});
+
+var appEl=document.querySelector(".app"),sidebarBtn=document.getElementById("sidebarToggle"),mobileBtn=document.getElementById("mobileMenuToggle");
+var NAV_STATE_KEY="daw-planner-sidebar-collapsed";
+var storedCollapse=null;
+try{storedCollapse=localStorage.getItem(NAV_STATE_KEY)}catch(e){}
+if(storedCollapse==="yes"||(storedCollapse===null&&window.innerWidth>800&&window.innerWidth<1150))appEl.classList.add("nav-collapsed");
+function isMobileNav(){return window.matchMedia("(max-width:800px)").matches}
+function refreshMenuState(){
+ var open=isMobileNav()?appEl.classList.contains("nav-mobile-open"):!appEl.classList.contains("nav-collapsed");
+ sidebarBtn.setAttribute("aria-expanded",String(open));
+ sidebarBtn.setAttribute("aria-label",open?"Cerrar menú lateral":"Abrir menú lateral");
+ sidebarBtn.title=open?"Cerrar menú":"Abrir menú";
+ mobileBtn.setAttribute("aria-expanded",String(isMobileNav()&&open));
+ mobileBtn.setAttribute("aria-label",isMobileNav()&&open?"Cerrar menú":"Abrir menú");
+}
+function toggleMenu(){
+ if(isMobileNav())appEl.classList.toggle("nav-mobile-open");
+ else{
+  appEl.classList.toggle("nav-collapsed");
+  try{localStorage.setItem(NAV_STATE_KEY,appEl.classList.contains("nav-collapsed")?"yes":"no")}catch(e){}
+ }
+ refreshMenuState();
+}
+sidebarBtn.addEventListener("click",toggleMenu);
+mobileBtn.addEventListener("click",toggleMenu);
+document.getElementById("menuOverlay").addEventListener("click",function(){appEl.classList.remove("nav-mobile-open");refreshMenuState()});
+window.addEventListener("resize",function(){if(!isMobileNav())appEl.classList.remove("nav-mobile-open");refreshMenuState()});
+refreshMenuState();
+
+document.querySelectorAll(".nav-btn").forEach(function(el){el.addEventListener("click",function(){if(isMobileNav()){appEl.classList.remove("nav-mobile-open");refreshMenuState()}})});
 document.querySelectorAll("[data-goto]").forEach(function(el){el.addEventListener("click",function(){showView(el.dataset.goto)})});
 function eventsOn(k){return storage.filter(function(e){return e.date===k})}
 function holidayOn(k){return eventsOn(k).find(function(e){return e.kind==="holiday"})||holidays.get(k)}
@@ -346,6 +473,33 @@ function examSlot(exam){
   if(mins>=a[0]*60+a[1]&&mins<b[0]*60+b[1])return i;
  }
  return -1;
+}
+function mobileWeekHtml(weekStart){
+ var names=["Lunes","Martes","Miércoles","Jueves","Viernes"];
+ var pieces=[];
+ for(var d=0;d<5;d++){
+  var date=addDay(weekStart,d),dateKey=key(date);
+  var holiday=holidayOn(dateKey),exams=eventsOn(dateKey).filter(function(e){return e.kind==="exam"});
+  var chunks=[];
+  if(holiday){
+   chunks.push('<div class="mobile-holiday">☼ '+safe(holiday.title)+' — Sin clases</div>');
+  }else{
+   for(var i=0;i<slots.length;i++){
+    var subCode=schedule[d+1][i],timeText=slots[i].time.replace(" – ","–");
+    var onSlot=exams.filter(function(e){return examSlot(e)===i});
+    if(subCode){
+     var sub=subMap[subCode],room=rooms[(d+1)+"-"+i]||"A103";
+     chunks.push('<div class="mobile-lesson"><div class="mobile-time">'+safe(timeText)+'</div><button type="button" class="mobile-class" style="--sub-bg:'+sub.bg+';--sub-ink:'+sub.fg+'" data-date="'+dateKey+'"><strong>'+safe(sub.name)+'</strong><span>'+safe(sub.teacher)+' · '+safe(room)+'</span>'+(onSlot.length?'<em>✎ '+safe(onSlot[0].title)+'</em>':"")+'</button></div>');
+    }else if(onSlot.length){
+     chunks.push('<div class="mobile-lesson"><div class="mobile-time">'+safe(timeText)+'</div><button type="button" class="mobile-class" data-date="'+dateKey+'" style="--sub-bg:#5a344d;--sub-ink:#ffe0ea"><strong>✎ '+safe(onSlot[0].title)+'</strong></button></div>');
+    }else{
+     chunks.push('<div class="mobile-lesson"><div class="mobile-time">'+safe(timeText)+'</div><div class="mobile-empty">Hora libre</div></div>');
+    }
+   }
+  }
+  pieces.push('<div class="mobile-day-card'+(dateKey===key(today)?" current":"")+'"><div class="mobile-day-heading"><button type="button" data-date="'+dateKey+'">'+names[d]+' · '+date.getDate()+'</button><small>'+safe(fmt(dateKey,{month:"long"}))+'</small></div>'+chunks.join("")+'</div>');
+ }
+ return '<div class="mobile-week-list" aria-label="Horario completo de lunes a viernes">'+pieces.join("")+'</div>';
 }
 function calHtml(){
  var weekStart=startOfWeek(displayed),weekEnd=addDay(weekStart,6);
@@ -396,8 +550,8 @@ function calHtml(){
  }else strip+='<span class="tt-free-weekend">No tienes exámenes apuntados esta semana.</span>';
  strip+='</div></div>';
  return '<div class="week-head"><div><div class="eyebrow" style="margin-bottom:4px">HORARIO SEMANAL · DAW1M</div><span class="week-range">'+safe(range)+'</span></div><div class="week-chooser"><button type="button" class="arrow" data-week="-1" aria-label="Semana anterior">‹</button><button type="button" class="btn small" data-current-week="1">Esta semana</button><button type="button" class="arrow" data-week="1" aria-label="Semana siguiente">›</button></div></div>'+
- '<div class="week-scroll" role="region" aria-label="Horario semanal de lunes a viernes. Desplaza horizontalmente para ver los cinco días." tabindex="0"><div class="timetable-grid">'+cells.join("")+'</div></div>'+
- strip+'<p class="tt-instructions">Selecciona una asignatura para ver el día completo. Las clases están colocadas en sus horas, como en el horario del instituto. Si no caben todas las columnas en tu pantalla, desplaza la tabla hacia los lados.</p>';
+ '<div class="week-scroll" role="region" aria-label="Horario semanal completo de lunes a viernes" tabindex="0"><div class="timetable-grid">'+cells.join("")+'</div></div>'+mobileWeekHtml(weekStart)+
+ strip+'<p class="tt-instructions">Puedes elegir una asignatura para ver el detalle del día. Toda la semana se adapta a la pantalla sin tener que arrastrar hacia los lados.</p>';
 }
 function renderCalendar(){
  var html=calHtml();
