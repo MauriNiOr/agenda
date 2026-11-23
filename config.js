@@ -1,7 +1,7 @@
 // DAW Planner · Configuración pública de Supabase
-// Rellena solo URL y Publishable key (o anon key antiguo).
-// Nunca añadas service_role, secret keys, tokens personales ni contraseñas.
+// Utiliza solamente la Project URL y la publishable key.
+// Nunca publiques service_role, secret keys, passwords ni tokens personales.
 window.DAW_SUPABASE_CONFIG = {
-  url: "",
-  publishableKey: ""
+  url: "https://ejmpoevwpwsaupjrrprn.supabase.co",
+  publishableKey: "sb_publishable_6XjKf1ftum2ApH8GzcrBQQ_Mleoi66c"
 };
