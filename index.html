@@ -295,6 +295,31 @@ body{background:var(--bg);color:var(--ink);font-size:15px}
  .tt-exams-strip{margin-top:14px}
 }
 
+
+/* Sincronización cifrada opcional sin alterar los datos locales existentes */
+.sync-status{display:flex;gap:12px;align-items:center;background:#1c2d45;border:1px solid #445c7a;padding:17px;border-radius:14px;margin:0 0 20px}
+.sync-status-icon{width:44px;height:44px;flex-shrink:0;display:grid;place-items:center;background:#30375c;border-radius:12px;font-size:23px}
+.sync-status strong{display:block;color:#f7faff;font-size:14px}
+.sync-status small{display:block;color:#b5c7e0;font-size:12px;line-height:1.6;margin-top:4px}
+.sync-help{line-height:1.75;color:#b9cce3;font-size:13px;margin:0 0 16px}
+.sync-help strong{color:#f1f5ff}
+.sync-form{display:grid;gap:15px}
+.sync-field label{font-size:12px;font-weight:800;color:#d9e6fa;display:block;margin:0 0 7px}
+.sync-field input{background:#0e1a2e;border:1px solid #50617f;color:#f4f9ff;border-radius:10px;padding:13px;width:100%;font:inherit}
+.sync-field input::placeholder{color:#8f9fb9}
+.sync-actions{display:flex;gap:9px;flex-wrap:wrap}
+.sync-actions .btn{white-space:normal}
+.sync-privacy{background:#233149;border:1px solid #4b6081;padding:13px;border-radius:11px;font-size:11px;line-height:1.7;color:#d0dff5;margin:10px 0 0}
+.sync-privacy strong{color:#f4f6ff}
+.sync-steps{margin:0 0 20px;padding-left:23px;color:#c8d7e9;font-size:13px;line-height:1.9}
+.sync-steps li{margin:0 0 7px}
+.sync-steps a{color:#c7bcff;font-weight:770}
+.sync-info-note{background:#393225;color:#f8deb0;border:1px solid #8f7444;padding:14px;border-radius:12px;margin:15px 0;font-size:12px;line-height:1.65}
+.cloud-quick-button{border:1px solid #655d9d;background:#282a50;border-radius:11px;color:#e7dfff;font-size:12px;padding:10px 12px;font-weight:800}
+.cloud-quick-button:hover{background:#413b78}
+.sync-panel{max-width:760px}
+@media(max-width:560px){.sync-status{padding:12px}.sync-actions .btn{flex:1}.sync-steps{padding-left:19px}}
+
 </style>
 </head>
 <body>
@@ -308,6 +333,7 @@ body{background:var(--bg);color:var(--ink);font-size:15px}
     <button class="nav-btn" data-view="horario" aria-label="Horario"><span class="nav-ico">◷</span><span class="nav-label">Mi horario</span></button>
     <button class="nav-btn" data-view="examenes" aria-label="Exámenes"><span class="nav-ico">✎</span><span class="nav-label">Exámenes</span></button>
     <button class="nav-btn" data-view="festivos" aria-label="Festivos"><span class="nav-ico">☼</span><span class="nav-label">Festivos</span></button>
+    <button class="nav-btn" data-view="nube" aria-label="Sincronización en la nube"><span class="nav-ico">☁</span><span class="nav-label">Sincronización</span></button>
   </nav>
   <div class="sidebar-bottom"><span class="status-dot"></span><b>Curso DAW1M · 2026/27</b><p>Horario adaptado a tu grupo de Programación con Jaime Bocío.</p></div>
 </aside>
@@ -324,13 +350,40 @@ body{background:var(--bg);color:var(--ink);font-size:15px}
   <section id="view-horario" class="view"><div class="headline"><div><div class="eyebrow">CLASES SEMANALES</div><h1>Mi horario</h1><p class="subtitle">De lunes a viernes · DAW1M · Programación con Jaime Bocío.</p></div><span class="pill">Curso 2026/27</span></div><div class="panel"><div class="panel-title"><h2>Horario de clases</h2><span class="subtitle">Desliza horizontalmente en móvil →</span></div><div class="week-wrap" id="weeklySchedule"></div><div class="subject-legend" id="subjectLegend"></div><p class="section-note">Los tramos de Programación se han seleccionado del grupo de <b>Jaime Bocío</b> que aparece en tu horario. Las aulas pueden variar; compruébalas en el centro.</p></div></section>
   <section id="view-examenes" class="view">
     <div class="headline"><div><div class="eyebrow">TUS EVALUACIONES</div><h1>Exámenes y notas</h1><p class="subtitle">Organiza tus próximos exámenes y guarda tus calificaciones una vez pasada la fecha.</p></div><button class="btn primary add-exam">＋ Añadir examen</button></div>
-    <div class="storage-notice">✓ <strong>Guardado automático:</strong> los exámenes y sus notas se conservan al recargar o cerrar esta página en el mismo navegador y dispositivo. No se sincronizan entre móviles ni ordenadores.</div>
+    <div class="storage-notice">✓ <strong>Guardado automático:</strong> los exámenes y sus notas se conservan en este navegador. Para tenerlos también en el móvil, abre «Sincronización» y conecta GitHub.</div>
     <section class="exam-section" aria-labelledby="futureExamTitle"><div class="section-toolbar"><h2 id="futureExamTitle">📅 Próximos exámenes</h2><span class="counter-badge" id="futureExamCount">0 pendientes</span></div><div class="exams-grid" id="examList"></div></section>
     <section class="exam-section past-section" aria-labelledby="pastExamTitle"><div class="section-toolbar"><h2 id="pastExamTitle">📝 Exámenes realizados</h2><span class="counter-badge" id="pastExamCount">0 realizados</span></div><p class="section-explanation">Cuando termine el día de un examen, aparecerá aquí automáticamente. Escribe tu nota del 0 al 10 y pulsa <b>Guardar nota</b>.</p><div class="exams-grid" id="pastExamList"></div></section>
     <div class="backup-tools"><button class="btn small" id="exportBackup">↓ Exportar copia de seguridad</button><button class="btn small" id="importBackup">↑ Importar copia</button><input type="file" id="backupFile" accept="application/json,.json" hidden><button class="btn small" id="exportIcs">▣ Exportar calendario (.ics)</button></div>
     <p class="section-note">La información se guarda en el almacenamiento local del navegador, no en GitHub. Para usarla en otro dispositivo, exporta una copia e impórtala allí. Evita la navegación privada y no borres los datos del sitio si quieres conservar tus exámenes.</p>
   </section>
   <section id="view-festivos" class="view"><div class="headline"><div><div class="eyebrow">CALENDARIO ESCOLAR</div><h1>Festivos y vacaciones</h1><p class="subtitle">Cataluña y Reus · Curso escolar 2026–2027.</p></div><button class="btn primary add-holiday">＋ Día libre del centro</button></div><div class="warn">ℹ️ Incluye festivos oficiales y vacaciones escolares. <b>No incluye los 4 días de libre disposición de tu instituto</b> porque dependen del centro. Puedes añadirlos con el botón superior. La fecha final de clases de FP también depende del centro.</div><div class="holiday-grid" id="holidayList"></div><div class="source-row"><a href="https://web.gencat.cat/ca/ciutadania/educacio-formacio/calendari-escolar-catalunya" target="_blank" rel="noopener">↗ Calendario escolar oficial</a><a href="https://treball.gencat.cat/ca/ambits/relacions_laborals/ci/calendari_laboral/calendari-festes-2027/" target="_blank" rel="noopener">↗ Festivos oficiales 2027</a><a href="https://seuelectronica.dipta.cat/calendari-festius?p_p_id=2_WAR_kaleodesignerportlet" target="_blank" rel="noopener">↗ Festivos Reus 2026</a></div></section>
+
+  <section id="view-nube" class="view">
+    <div class="headline"><div><div class="eyebrow">TUS EXÁMENES EN TODOS LOS DISPOSITIVOS</div><h1>Sincronización en la nube ☁</h1><p class="subtitle">Conserva tus exámenes, días libres y notas en el ordenador y en el móvil.</p></div></div>
+    <div class="panel sync-panel">
+      <div class="sync-status" role="status" aria-live="polite"><div class="sync-status-icon">☁</div><div><strong id="cloudStatusTitle">Datos guardados en este navegador</strong><small id="cloudStatusDetail">Tus exámenes actuales no se borrarán. Para compartirlos entre dispositivos, conecta la nube.</small></div></div>
+      <div class="sync-help"><strong>Tu agenda actual está a salvo.</strong> La sincronización añade los datos que falten entre dispositivos; no sustituye toda tu agenda. Antes de conectarla por primera vez se guarda una copia local de seguridad.</div>
+      <div class="sync-info-note"><strong>Configuración necesaria una sola vez por sesión:</strong> GitHub Pages no tiene una base de datos propia. Esta opción utiliza tu repositorio de GitHub para guardar <strong>solo datos cifrados</strong>. Tendrás que conectar tu GitHub en cada dispositivo. La contraseña de cifrado debe ser la misma en ambos.</div>
+      <h2 class="section-h2" style="margin:0 0 13px">1. Autorizar tu propio GitHub</h2>
+      <ol class="sync-steps">
+        <li>Abre <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">Crear token de GitHub (fine-grained)</a>.</li>
+        <li>Selecciona <strong>Repository access → Only select repositories → agenda</strong> y en permisos <strong>Contents → Read and write</strong>. No concedas otros permisos.</li>
+        <li>Copia el token y pégalo aquí, <strong>no en el chat</strong>. Guárdalo en tu gestor de contraseñas para conectarte desde el móvil.</li>
+      </ol>
+      <h2 class="section-h2" style="margin:22px 0 14px">2. Conectar y sincronizar</h2>
+      <form id="cloudForm" class="sync-form" autocomplete="off">
+        <div class="sync-field"><label for="cloudToken">Token de acceso a GitHub</label><input type="password" id="cloudToken" name="cloudToken" placeholder="github_pat_..." required spellcheck="false" autocomplete="off"></div>
+        <div class="sync-field"><label for="cloudPassword">Contraseña privada de cifrado (mínimo 12 caracteres)</label><input type="password" id="cloudPassword" name="cloudPassword" minlength="12" placeholder="Una contraseña larga que recuerdes" required autocomplete="new-password"></div>
+        <div class="sync-actions">
+          <button type="submit" class="btn primary" id="connectCloud">☁ Conectar y sincronizar</button>
+          <button type="button" class="btn" id="syncNow" disabled>↻ Sincronizar ahora</button>
+          <button type="button" class="btn" id="disconnectCloud" disabled>Desconectar esta sesión</button>
+        </div>
+      </form>
+      <p class="sync-privacy"><strong>Privacidad:</strong> las notas y exámenes se cifran antes de enviarlos a GitHub, pero el archivo cifrado estará en un repositorio público. Usa una contraseña larga y única. Tu token y contraseña solo se conservan en la sesión de esta pestaña; no se suben a GitHub. Si cierras la sesión tendrás que introducirlos otra vez para sincronizar. Aunque la nube falle, seguirás pudiendo usar tus datos locales.</p>
+      <div class="backup-tools"><button type="button" class="btn small" id="cloudBackup">↓ Descargar una copia de mis exámenes</button><button type="button" class="btn small" id="cloudGoExams">Ver mis exámenes</button></div>
+    </div>
+  </section>
 </main></div>
 <div class="modal-backdrop" id="modalBackdrop" role="presentation">
 <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -354,6 +407,10 @@ body{background:var(--bg);color:var(--ink);font-size:15px}
 (function(){
 "use strict";
 var STORAGE_KEY="daw-planner-mauri-2026-v1";
+var DELETED_KEY="daw-planner-mauri-2026-deleted-v1";
+var CLOUD_BACKUP_KEY="daw-planner-backup-previo-nube-v1";
+var CLOUD_CREDENTIALS_KEY="daw-planner-cloud-session-v1";
+var CLOUD_FILE_URL="https://api.github.com/repos/MauriNiOr/agenda/contents/agenda-sync.json";
 var today=new Date();today.setHours(0,0,0,0);
 function pad(n){return String(n).padStart(2,"0")}
 function key(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
@@ -409,14 +466,38 @@ holidayRaw.forEach(function(h){if(h[2].indexOf("Festivo")===0)holidays.set(h[0],
 var storage=[];
 try{var data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");if(Array.isArray(data))storage=data.filter(validEvent)}catch(e){}
 function validEvent(x){return !!(x&&typeof x==="object"&&typeof x.id==="string"&&typeof x.title==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(x.date)&&["exam","holiday"].includes(x.kind))}
-function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(storage))}catch(e){toast("No se pudo guardar. Revisa el almacenamiento del navegador.")}}
+var deletedEvents={};
+try{var oldDeleted=JSON.parse(localStorage.getItem(DELETED_KEY)||"{}");if(oldDeleted&&typeof oldDeleted==="object"&&!Array.isArray(oldDeleted))deletedEvents=oldDeleted}catch(e){}
+function copyEvent(ev){return JSON.parse(JSON.stringify(ev))}
+function eventWithoutStamp(e){var v=copyEvent(e);delete v._updatedAt;return JSON.stringify(v)}
+var lastLocalEvents=new Map(storage.map(function(e){return [e.id,eventWithoutStamp(e)]}));
+function saveLocalWithoutSync(){
+ try{
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(storage));
+  localStorage.setItem(DELETED_KEY,JSON.stringify(deletedEvents));
+  lastLocalEvents=new Map(storage.map(function(e){return [e.id,eventWithoutStamp(e)]}));
+  return true;
+ }catch(e){toast("No se pudo guardar en este navegador. Descarga una copia de seguridad.");return false}
+}
+function save(){
+ var t=Date.now();
+ var present=new Set();
+ storage.forEach(function(ev){present.add(ev.id);
+  if(!lastLocalEvents.has(ev.id)||lastLocalEvents.get(ev.id)!==eventWithoutStamp(ev)){
+   ev._updatedAt=Math.max(t,Number(ev._updatedAt||0)+1);
+   if(deletedEvents[ev.id]&&deletedEvents[ev.id]<ev._updatedAt)delete deletedEvents[ev.id];
+  }
+ });
+ lastLocalEvents.forEach(function(_,id){if(!present.has(id))deletedEvents[id]=Math.max(Number(deletedEvents[id]||0),t)});
+ if(saveLocalWithoutSync())scheduleCloudSync();
+}
 function startOfWeek(d){var x=new Date(d);x.setHours(0,0,0,0);x.setDate(x.getDate()-((x.getDay()+6)%7));return x}
 var displayed=startOfWeek(today),selected=key(today),activeView="inicio";
 document.getElementById("todayLabel").textContent=today.toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
 var options=subjects.map(function(s){return '<option value="'+s.id+'">'+safe(s.name)+'</option>'}).join("");
 document.getElementById("eventSubject").innerHTML=options;
 function toast(message){var el=document.getElementById("toast");el.textContent=message;el.classList.add("show");clearTimeout(toast._timer);toast._timer=setTimeout(function(){el.classList.remove("show")},3500)}
-function titleFor(v){return ({inicio:"Inicio",calendario:"Calendario",horario:"Mi horario",examenes:"Exámenes",festivos:"Festivos"})[v]}
+function titleFor(v){return ({inicio:"Inicio",calendario:"Calendario",horario:"Mi horario",examenes:"Exámenes",festivos:"Festivos",nube:"Sincronización"})[v]}
 function showView(v){activeView=v;document.querySelectorAll(".view").forEach(function(el){el.classList.toggle("active",el.id==="view-"+v)});document.querySelectorAll(".nav-btn").forEach(function(el){el.classList.toggle("active",el.dataset.view===v)});document.getElementById("breadNow").textContent=titleFor(v);window.scrollTo({top:0,behavior:"smooth"});render()}
 document.querySelectorAll("[data-view]").forEach(function(el){el.addEventListener("click",function(){showView(el.dataset.view)})});
 
@@ -685,11 +766,181 @@ save();closeForm();displayed=startOfWeek(parseDate(obj.date));selected=obj.date;
 function download(name,text,type){var blob=new Blob([text],{type:type});var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000)}
 document.getElementById("exportBackup").addEventListener("click",function(){download("daw-planner-copia-"+key(today)+".json",JSON.stringify({version:1,events:storage},null,2),"application/json");toast("Copia de seguridad descargada")});
 document.getElementById("importBackup").addEventListener("click",function(){document.getElementById("backupFile").click()});
-document.getElementById("backupFile").addEventListener("change",function(e){var f=e.target.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){try{var d=JSON.parse(rd.result),arr=Array.isArray(d)?d:d.events;if(!Array.isArray(arr)||arr.some(function(x){return !validEvent(x)}))throw Error();if(!confirm("Se reemplazarán tus eventos actuales por los de la copia. ¿Continuar?"))return;storage=arr;save();render();toast("Copia importada correctamente")}catch(err){toast("No se pudo leer el archivo JSON")}};rd.readAsText(f);e.target.value=""});
+document.getElementById("backupFile").addEventListener("change",function(e){var f=e.target.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){try{var d=JSON.parse(rd.result),arr=Array.isArray(d)?d:d.events;if(!Array.isArray(arr)||arr.some(function(x){return !validEvent(x)}))throw Error();if(!confirm("Se añadirán los exámenes de la copia sin borrar los que ya tienes. ¿Continuar?"))return;var currentIds=new Set(storage.map(function(x){return x.id}));var count=0;arr.forEach(function(item){if(!currentIds.has(item.id)){storage.push(item);currentIds.add(item.id);count++}});save();render();toast("Importación completada: "+count+" eventos nuevos, ninguno borrado")}catch(err){toast("No se pudo leer el archivo JSON")}};rd.readAsText(f);e.target.value=""});
 function icsDate(k,t){return k.replace(/-/g,"")+(t?"T"+t.replace(":","")+"00":"")}
 function icsEsc(s){return String(s||"").replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\r?\n/g,"\\n")}
 document.getElementById("exportIcs").addEventListener("click",function(){var out=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//DAW Planner//ES","CALSCALE:GREGORIAN","X-WR-CALNAME:DAW Planner"];storage.forEach(function(e){out.push("BEGIN:VEVENT","UID:"+e.id+"@daw-planner","DTSTAMP:"+icsDate(key(today),"00:00")+"Z","SUMMARY:"+icsEsc(e.title),"DESCRIPTION:"+icsEsc(e.notes||""));if(e.kind==="holiday"){out.push("DTSTART;VALUE=DATE:"+icsDate(e.date),"DTEND;VALUE=DATE:"+icsDate(key(addDay(parseDate(e.date),1))))}else{out.push("DTSTART:"+icsDate(e.date,e.time||"09:00"),"DTEND:"+icsDate(e.date,e.time||"09:00"))}out.push("END:VEVENT")});out.push("END:VCALENDAR");download("daw-planner-eventos.ics",out.join("\r\n"),"text/calendar");toast("Archivo .ics descargado")});
 window.addEventListener("focus",function(){var current=new Date();current.setHours(0,0,0,0);if(key(current)!==key(today)){var oldWeek=key(startOfWeek(today));today=current;if(key(startOfWeek(today))!==oldWeek){displayed=startOfWeek(today);selected=key(today)}document.getElementById("todayLabel").textContent=today.toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"});render()}});
+
+/* Nube GitHub cifrada: sincronización optativa, siempre conservando localStorage */
+var cloudCredentials=null,cloudInProgress=false,cloudQueued=false,cloudTimer=null;
+function cloudUi(title,detail){
+ document.getElementById("cloudStatusTitle").textContent=title;
+ document.getElementById("cloudStatusDetail").textContent=detail;
+ document.getElementById("syncNow").disabled=!cloudCredentials;
+ document.getElementById("disconnectCloud").disabled=!cloudCredentials;
+}
+function bytesB64(bytes){
+ var parts=[],chunk=8192;
+ for(var i=0;i<bytes.length;i+=chunk)parts.push(String.fromCharCode.apply(null,bytes.subarray(i,i+chunk)));
+ return btoa(parts.join(""));
+}
+function b64Bytes(value){
+ var str=atob(String(value).replace(/\s+/g,"")),bytes=new Uint8Array(str.length);
+ for(var i=0;i<str.length;i++)bytes[i]=str.charCodeAt(i);
+ return bytes;
+}
+function encText(s){return new TextEncoder().encode(s)}
+function decText(b){return new TextDecoder().decode(b)}
+async function deriveCloudKey(pass,salt){
+ var base=await crypto.subtle.importKey("raw",encText(pass),"PBKDF2",false,["deriveKey"]);
+ return crypto.subtle.deriveKey({name:"PBKDF2",salt:salt,iterations:310000,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["encrypt","decrypt"]);
+}
+async function cloudEncrypt(obj,password){
+ var salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12));
+ var key=await deriveCloudKey(password,salt);
+ var encrypted=await crypto.subtle.encrypt({name:"AES-GCM",iv:iv},key,encText(JSON.stringify(obj)));
+ return {format:"daw-planner-encrypted-v1",salt:bytesB64(salt),iv:bytesB64(iv),ciphertext:bytesB64(new Uint8Array(encrypted))};
+}
+async function cloudDecrypt(payload,password){
+ if(!payload||payload.format!=="daw-planner-encrypted-v1"||!payload.ciphertext)throw Error("El archivo de nube tiene un formato que esta versión no entiende. No se ha modificado nada.");
+ var key=await deriveCloudKey(password,b64Bytes(payload.salt));
+ try{
+  var clear=await crypto.subtle.decrypt({name:"AES-GCM",iv:b64Bytes(payload.iv)},key,b64Bytes(payload.ciphertext));
+  var result=JSON.parse(decText(clear));
+  if(!result||!Array.isArray(result.events)||!result.events.every(validEvent))throw Error("Archivo de nube inválido");
+  return result;
+ }catch(err){throw Error("Contraseña incorrecta o copia cifrada dañada. No se han modificado tus datos.");}
+}
+async function githubRequest(method,token,body){
+ var res=await fetch(CLOUD_FILE_URL,{method:method,headers:{"Authorization":"Bearer "+token,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28","Content-Type":"application/json"},body:body?JSON.stringify(body):undefined,cache:"no-store"});
+ if(method==="GET"&&res.status===404)return null;
+ var payload;try{payload=await res.json()}catch(e){payload={message:"Respuesta no válida"}}
+ if(!res.ok){
+  if(res.status===401||res.status===403)throw Error("Permiso denegado. Comprueba el token y que tenga Contents: Read and write en el repositorio agenda.");
+  if(res.status===409||res.status===422){var e=new Error("Conflicto al guardar en GitHub");e.retryable=true;throw e}
+  throw Error("Error de GitHub ("+res.status+"): "+String(payload.message||"No disponible"));
+ }
+ return payload;
+}
+function revision(e){var x=Number(e._updatedAt||1);return Number.isFinite(x)&&x>0?x:1}
+function mergeCloudData(remoteData){
+ var remote=Array.isArray(remoteData.events)?remoteData.events.filter(validEvent):[];
+ var cloudDeleted=remoteData.deleted&&typeof remoteData.deleted==="object"&&!Array.isArray(remoteData.deleted)?remoteData.deleted:{};
+ var combinedDeleted=Object.assign({},deletedEvents);
+ Object.keys(cloudDeleted).forEach(function(id){
+  if(typeof cloudDeleted[id]==="number"&&Number.isFinite(cloudDeleted[id]))combinedDeleted[id]=Math.max(Number(combinedDeleted[id]||0),cloudDeleted[id]);
+ });
+ var combined=new Map();
+ function add(event){
+  if(!validEvent(event))return;
+  var original=combined.get(event.id);
+  if(!original){combined.set(event.id,copyEvent(event));return}
+  var recent=revision(event)>revision(original)?event:original;
+  var old=recent===event?original:event;
+  var chosen=copyEvent(recent);
+  if(!hasGrade(chosen)&&hasGrade(old))chosen.grade=old.grade;
+  if((!chosen.notes||!chosen.notes.trim())&&old.notes)chosen.notes=old.notes;
+  combined.set(event.id,chosen);
+ }
+ remote.forEach(add);
+ storage.forEach(add);
+ var events=[...combined.values()].filter(function(e){return Number(combinedDeleted[e.id]||0)<revision(e)});
+ events.sort(function(a,b){return a.date.localeCompare(b.date)||a.id.localeCompare(b.id)});
+ return {version:1,events:events,deleted:combinedDeleted};
+}
+function snapshotsEqual(a,b){return JSON.stringify(a)===JSON.stringify(b)}
+function persistCloudMerge(merged){
+ // Preserva una copia fija de la agenda anterior en el navegador.
+ try{
+  if(!localStorage.getItem(CLOUD_BACKUP_KEY)){
+   localStorage.setItem(CLOUD_BACKUP_KEY,JSON.stringify({version:1,savedAt:new Date().toISOString(),events:storage}));
+  }
+ }catch(e){}
+ storage=merged.events;
+ deletedEvents=merged.deleted;
+ saveLocalWithoutSync();
+ render();
+}
+async function runCloudSync(announce){
+ if(!cloudCredentials)return;
+ if(cloudInProgress){cloudQueued=true;return}
+ cloudInProgress=true;clearTimeout(cloudTimer);
+ cloudUi("Sincronizando con GitHub…","Leyendo los datos cifrados, combinando las agendas y guardando una copia.");
+ try{
+  var successful=false;
+  for(var attempt=0;attempt<4;attempt++){
+   var remoteFile=await githubRequest("GET",cloudCredentials.token);
+   var remoteSnapshot={version:1,events:[],deleted:{}};
+   if(remoteFile){
+    var remoteWrapper=JSON.parse(decText(b64Bytes(remoteFile.content)));
+    remoteSnapshot=await cloudDecrypt(remoteWrapper,cloudCredentials.password);
+   }
+   var merged=mergeCloudData(remoteSnapshot);
+   var unchanged=remoteFile&&snapshotsEqual(merged.events,remoteSnapshot.events)&&snapshotsEqual(merged.deleted,remoteSnapshot.deleted||{});
+   if(!unchanged){
+    var encrypted=await cloudEncrypt(merged,cloudCredentials.password);
+    var body={message:"Sync agenda DAW (encrypted data)",content:bytesB64(encText(JSON.stringify(encrypted)))};
+    if(remoteFile)body.sha=remoteFile.sha;
+    try{await githubRequest("PUT",cloudCredentials.token,body)}catch(e){if(e.retryable&&attempt<3)continue;throw e}
+   }
+   persistCloudMerge(merged);
+   successful=true;
+   break;
+  }
+  if(!successful)throw Error("No se pudo completar por cambios simultáneos. Reintenta.");
+  cloudUi("✓ Agenda sincronizada","Tus exámenes y notas están cifrados en GitHub. Última sincronización: "+new Date().toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"})+".");
+  if(announce)toast("Agenda sincronizada sin borrar tus datos.");
+ }catch(err){
+  cloudUi("⚠ No se ha podido sincronizar",String(err.message||err)+". Los datos siguen guardados en este dispositivo.");
+  if(announce)toast("Sincronización fallida. Tus exámenes locales no se han borrado.");
+ }finally{
+  cloudInProgress=false;
+  if(cloudQueued){cloudQueued=false;scheduleCloudSync()}
+ }
+}
+function scheduleCloudSync(){
+ if(!cloudCredentials)return;
+ clearTimeout(cloudTimer);
+ cloudTimer=setTimeout(function(){runCloudSync(false)},1800);
+}
+document.getElementById("cloudForm").addEventListener("submit",function(event){
+ event.preventDefault();
+ var token=document.getElementById("cloudToken").value.trim();
+ var pass=document.getElementById("cloudPassword").value;
+ if(!token||pass.length<12){toast("Introduce el token y una contraseña de 12 caracteres o más.");return}
+ cloudCredentials={token:token,password:pass};
+ // Solo dura esta sesión. Nunca se inserta en el repositorio ni en el HTML.
+ try{sessionStorage.setItem(CLOUD_CREDENTIALS_KEY,JSON.stringify(cloudCredentials))}catch(e){}
+ document.getElementById("cloudToken").value="";
+ document.getElementById("cloudPassword").value="";
+ // Copia de emergencia antes de contactar el servidor por primera vez.
+ try{if(!localStorage.getItem(CLOUD_BACKUP_KEY))localStorage.setItem(CLOUD_BACKUP_KEY,JSON.stringify({version:1,savedAt:new Date().toISOString(),events:storage}))}catch(e){}
+ runCloudSync(true);
+});
+document.getElementById("syncNow").addEventListener("click",function(){runCloudSync(true)});
+document.getElementById("disconnectCloud").addEventListener("click",function(){
+ cloudCredentials=null;cloudQueued=false;clearTimeout(cloudTimer);
+ try{sessionStorage.removeItem(CLOUD_CREDENTIALS_KEY)}catch(e){}
+ cloudUi("Datos guardados en este navegador","Has desconectado la sincronización en esta sesión. Tus exámenes y notas permanecen aquí.");
+ toast("Sesión desconectada. No se ha borrado ningún examen.");
+});
+document.getElementById("cloudBackup").addEventListener("click",function(){
+ download("agenda-DAW-copia-"+key(new Date())+".json",JSON.stringify({version:1,events:storage},null,2),"application/json");
+ toast("Copia descargada. Guárdala en un lugar seguro.");
+});
+document.getElementById("cloudGoExams").addEventListener("click",function(){showView("examenes")});
+try{
+ var savedCredentials=JSON.parse(sessionStorage.getItem(CLOUD_CREDENTIALS_KEY)||"null");
+ if(savedCredentials&&typeof savedCredentials.token==="string"&&typeof savedCredentials.password==="string"){
+  cloudCredentials=savedCredentials;
+  setTimeout(function(){runCloudSync(false)},1000);
+ }
+}catch(e){}
+if(cloudCredentials)cloudUi("Nube conectada en esta sesión","Comprobando datos cifrados y recuperando exámenes de otros dispositivos.");
+window.addEventListener("online",function(){if(cloudCredentials)runCloudSync(false)});
+document.addEventListener("visibilitychange",function(){if(!document.hidden&&cloudCredentials)runCloudSync(false)});
+
 renderWeek();render();
 })();
 </script>
